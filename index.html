@@ -1,0 +1,709 @@
+﻿<!doctype html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Idknoou — Sitio Oficial</title>
+  <meta name="description" content="Artista urbano latino desde Concepción, Chile.">
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- AOS (reveal suave) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <!-- GSAP + ScrollTrigger (entradas suaves) -->
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
+
+  <style>
+    :root{
+      /* ALTURA DEL NAV. Si cambias padding del nav, ajusta esto. */
+      --nav-h: 60px;
+      --muted: rgba(255,255,255,.56);
+      --accent: #27e1c1;
+      --fg: #fff;
+    }
+
+    body{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:#fff;
+      background: radial-gradient(circle at top, rgba(0,0,0,.45), rgba(0,0,0,.9));
+    }
+    html{ background:#000; }
+
+    .container      { width:min(1100px, 92%); margin:0 auto }
+    .container-wide { width:min(1400px, 96%); margin:0 auto }
+    section { padding:70px 0; }
+
+    /* NAV */
+    header {
+      position:sticky;
+      top:0;
+      z-index:200;
+      background:#0b0b0bcc;
+      backdrop-filter: blur(8px);
+    }
+    nav {
+      height: calc(var(--nav-h) + env(safe-area-inset-top));
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding-top: env(safe-area-inset-top);
+    }
+    nav a {
+      color:inherit;
+      text-decoration:none;
+      font-weight:600;
+      font-size:.9rem;
+    }
+
+    /* HERO */
+    .hero { padding: 20px 0 10px; text-align:center }
+    .hero h1 {
+      font-size: clamp(38px, 8vw, 92px);
+      line-height:.95; margin:0;
+    }
+    .muted { color: var(--muted) }
+
+    /* ABOUT */
+    .about { padding-top: 24px }
+    .about-grid { display:grid; grid-template-columns: 1.2fr 1fr; gap:24px; align-items:start }
+    .about-card {
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:18px
+    }
+    .about dl { display:grid; grid-template-columns: auto 1fr; gap:10px 16px; margin:0 }
+    .about dt { color:var(--muted) }
+
+    /* Spotify */
+    .spotify-wrap {
+      padding-top: 5px;
+      display: flex;
+      justify-content: center;
+    }
+    .spotify-embed {
+      width: 600px;
+      max-width: 1000px;
+      height: 735px;
+      border-radius: 12px;
+    }
+
+    /* =========================
+       SHOWS (parte importante)
+       ========================= */
+    .shows .show-header h2 {
+      font-size: clamp(28px, 6.2vw, 64px);
+      margin:0 0 6px; line-height:1.02;
+    }
+    .shows .show-header .subtitle {
+      color: var(--muted);
+      margin: 0 auto;
+      max-width: 820px
+    }
+
+    /* cada grupo de show */
+    .show-group {
+      position: relative;
+      padding-top: calc(var(--nav-h) + 4px);
+      margin-bottom: 54px;
+    }
+
+    /* capa sticky (no el contenido) */
+    .show-header.pin{
+      position: sticky;
+      top: calc(var(--nav-h) + env(safe-area-inset-top));
+      z-index: 80;
+      width: 100%;
+      pointer-events: none;   /* el blur no bloquea clicks */
+    }
+
+    /* contenido real del header */
+    .show-header.pin .header-inner{
+      pointer-events:auto;
+      width: min(1100px, 96%);
+      margin: 0 auto;
+      text-align:center;
+      padding: 14px 0 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* el cristal que aparece cuando está pegado */
+    .show-header.pin::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      transform: translateX(-90%);
+      top:-20px;
+      width: min(1180px, 100vw);
+      height: 130px;
+      /* degradado que nace abajo y se pierde arriba */
+      background: linear-gradient(
+        to top,
+        rgba(5,5,5,.92) 0%,
+        rgba(5,5,5,.55) 46%,
+        rgba(5,5,5,0) 0px
+      );
+      backdrop-filter: blur(18px);
+      opacity:0;
+      transition: opacity .22s ease-out;
+      /* para que no se vea una caja dura a los lados */
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      pointer-events:none;
+    }
+
+    /* cuando está pegado al top */
+    .show-header.pin.is-stuck::before{
+      opacity:1;
+    }
+
+    /* Botonera bajo título */
+    .show-actions{
+      display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+      margin: 8px 0 12px;
+    }
+
+    /* Bloques alternados */
+    .show-feature{
+      display:grid; grid-template-columns: 1.2fr 1fr;
+      gap: clamp(18px, 2.6vw, 36px);
+      align-items:center;
+      margin: 22px 0 36px;
+    }
+    .show-feature.right{ grid-template-columns: 1fr 1.2fr }
+
+    .show-feature .photo{
+      position: relative;
+      display:block;
+      border-radius:18px; overflow:hidden;
+      border:1px solid rgba(255,255,255,.09); box-shadow:0 18px 50px rgba(0,0,0,.35);
+      aspect-ratio: 4/3;
+      background: rgba(255,255,255,.03);
+    }
+    .show-feature .photo img{ width:100%; height:100%; object-fit:cover; display:block }
+
+    .year-badge{
+      position:absolute;
+      top:14px; left:14px;
+      background: rgba(0,0,0,.65);
+      border:1px solid rgba(255,255,255,.3);
+      padding:2px 10px 3px;
+      border-radius:9999px;
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+
+    .show-feature .info h3{ margin:0 0 8px; font-size:clamp(20px, 3vw, 28px) }
+    .show-feature .info p{ line-height:1.55; }
+
+    .show-strip{ overflow-x:auto; white-space:nowrap; padding:8px 0 2px; scrollbar-width: thin; }
+    .show-strip .tile{
+      display:inline-block; width:clamp(220px, 26vw, 360px); aspect-ratio:4/3;
+      margin-right:12px; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.03);
+    }
+    .show-strip .tile img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05); transition:transform .25s }
+    .show-strip .tile:hover img{ transform:scale(1.04) }
+    .show-strip .tile:last-child{ margin-right:0 }
+
+    /* Botones base */
+    .btn{ display:inline-block; padding:10px 16px; border-radius:14px; background:var(--accent); color:#0b0b0b; font-weight:700; transition:transform .2s, box-shadow .2s }
+    .btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(39,225,193,.25) }
+    .btn.ghost{ background:transparent; color:var(--fg); border:1px solid rgba(255,255,255,.18) }
+
+    /* Contacto */
+    .contact-inline{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .contact-inline .tel{
+      font-weight:700;
+      text-decoration:none;
+      color:#fff;
+    }
+    .contact-actions{
+      display:none;
+      gap:10px;
+      margin-top:6px;
+    }
+    @media (hover:none), (pointer:coarse){
+      .contact-actions{ display:flex; flex-wrap:wrap; }
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .about-grid{ grid-template-columns: 1fr }
+      .show-feature, .show-feature.right{ grid-template-columns: 1fr }
+    }
+    @media (max-width: 640px){
+      .hero { padding: 10px 0 6px }
+      .show-group { padding-top: calc(var(--nav-h) + 6px) }
+      .shows .show-header h2 { line-height: 1.05 }
+      .spotify-embed { height: 420px; max-width:100%; }
+      .show-header.pin::before{
+        height: 118px;
+        top:-20px;
+      }
+    }
+
+    /* VIDEO DE FONDO */
+    .bg-video{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    main, footer { position: relative; z-index: 2; }
+  </style>
+</head>
+<body id="top">
+
+  <!-- VIDEO DE FONDO -->
+  <video id="bgVideo" class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/video/bg-show1.mp4" type="video/mp4">
+  </video>
+
+  <header>
+    <nav class="container">
+      <a href="#top">Inicio</a>
+      <a href="#shows">Shows</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero container-wide">
+      <div data-aos="fade-up">
+        <h1>Idknoou</h1>
+        <p class="muted" data-aos="fade-up" data-aos-delay="100">
+          Esto es música para las señoritas.
+        </p>
+      </div>
+    </section>
+
+    <!-- Spotify -->
+    <div class="container-wide spotify-wrap" aria-label="Escucha a Idknoou" data-aos="fade-up">
+      <iframe class="spotify-embed"
+        src="https://open.spotify.com/embed/artist/65m6UOB4ekojjqf7FOYqPo?utm_source=generator&theme=0"
+        width="100%" frameborder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+      </iframe>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="bio" class="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-card" data-aos="fade-up">
+            <h2>Acerca de mí</h2>
+            <p class="muted">
+              Víctor Ignacio Monsalve Riquelme, más conocido como IDKNOOU, es un artista urbano chileno nacido en Concepción.
+              Cantante, productor y beatmaker. A sus 22 años proyecta una línea urbana latina con enfoque en shows en vivo
+              y puesta visual.
+            </p>
+          </div>
+          <div class="about-card" data-aos="fade-up" data-aos-delay="120">
+            <h3>Datos rápidos</h3>
+            <dl>
+              <dt>Edad</dt><dd>22</dd>
+              <dt>Ciudad</dt><dd>Concepción, CL</dd>
+              <dt>Rol</dt><dd>Cantante, compositor, productor, beatmaker</dd>
+              <dt>Género</dt><dd>Urbano latino</dd>
+              <dt>Correo</dt><dd><a href="mailto:lapromesaidk.contacto@gmail.com">lapromesaidk.contacto@gmail.com</a></dd>
+              <dt>Contacto</dt><dd>+56 9 6648 6158</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOWS -->
+    <section id="shows" class="shows">
+      <div class="container-wide">
+
+        <!-- 1) Fiestas Patrias -->
+        <div class="show-group" id="show-fiestas-patrias">
+          <header class="show-header pin" data-aos="fade-up">
+            <div class="header-inner">
+              <h2>Fiestas Patrias</h2>
+              <p class="subtitle">Teloneo a Agrupación Marilyn</p>
+            </div>
+          </header>
+
+          <div class="show-actions" data-aos="fade-up">
+            <a class="btn ghost" href="#" target="_blank" rel="noopener">Video recopilación</a>
+          </div>
+
+          <article class="show-feature left" data-aos="fade-up">
+            <a class="photo" href="assets/img/m3.JPG" target="_blank" rel="noopener">
+              <span class="year-badge">2025</span>
+              <img src="assets/img/m3.JPG" alt="Fiestas Patrias — escena">
+            </a>
+            <div class="info">
+              <h3>Show masivo en fiesta ciudadana</h3>
+              <p>
+                Presentación en marco de Fiestas Patrias, escenario abierto y público familiar,
+                previo al show de Agrupación Marilyn. Apertura urbana con repertorio propio y covers adaptados.
+              </p>
+              <p>
+                Performance sobre público superior a 30.000 personas.
+              </p>
+            </div>
+          </article>
+
+          <article class="show-feature right" data-aos="fade-up">
+            <a class="photo" href="assets/img/m1.JPG" target="_blank" rel="noopener">
+              <img src="assets/img/m1.JPG" alt="Fiestas Patrias — crowd">
+            </a>
+            <div class="info">
+              <h3>Recepción</h3>
+              <p>Segmento bailable y dinámico para preparar al público para el acto principal.</p>
+              <p>Se trabajó con formato reducido de banda y pistas propias.</p>
+            </div>
+          </article>
+
+          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Fiestas Patrias">
+            <a class="tile" href="assets/img/m2.JPG" target="_blank" rel="noopener">
+              <img src="assets/img/m2.JPG" alt="Detalle 1">
+            </a>
+            <a class="tile" href="assets/img/m.JPG" target="_blank" rel="noopener">
+              <img src="assets/img/m.JPG" alt="Detalle 2">
+            </a>
+            <a class="tile" href="assets/img/m4.JPG" target="_blank" rel="noopener">
+              <img src="assets/img/m4.JPG" alt="Detalle 3">
+            </a>
+          </div>
+        </div>
+
+        <!-- 2) Festival Graneros de Chile -->
+        <div class="show-group" id="show-graneros">
+          <header class="show-header pin" data-aos="fade-up">
+            <div class="header-inner">
+              <h2>Festival Graneros de Chile</h2>
+              <p class="subtitle">Graneros, Escenario Principal</p>
+            </div>
+          </header>
+
+          <div class="show-actions" data-aos="fade-up">
+            <a class="btn ghost" href="https://youtu.be/Dwiox4WpqZs?t=7066" target="_blank" rel="noopener">Transmisión completa</a>
+          </div>
+
+          <article class="show-feature right" data-aos="fade-up">
+            <a class="photo" href="assets/img/g.jpg" target="_blank" rel="noopener">
+              <span class="year-badge">2025</span>
+              <img src="assets/img/g.jpg" alt="Graneros — main">
+            </a>
+            <div class="info">
+              <h3>Presentación festivalera</h3>
+              <p>
+                Set urbano para festival regional, con salida en streaming y registro audiovisual público.
+                Repertorio orientado a energía en vivo y participación.
+              </p>
+              <p>
+                Show visto en transmisión por YouTube y público presencial.
+              </p>
+            </div>
+          </article>
+
+          <article class="show-feature left" data-aos="fade-up">
+            <a class="photo" href="assets/img/g1.jpg" target="_blank" rel="noopener">
+              <img src="assets/img/g1.jpg" alt="Graneros — crowd">
+            </a>
+            <div class="info">
+              <h3>Highlights</h3>
+              <p>Buen comportamiento de los temas más rítmicos, interacción con animación del festival.</p>
+              <p>Se trabajó imagen de artista urbano chileno con proyección.</p>
+            </div>
+          </article>
+
+          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Graneros">
+            <a class="tile" href="assets/img/g2.jpg" target="_blank" rel="noopener">
+              <img src="assets/img/g2.jpg" alt="Detalle 1">
+            </a>
+            <a class="tile" href="assets/img/g3.jpg" target="_blank" rel="noopener">
+              <img src="assets/img/g3.jpg" alt="Detalle 2">
+            </a>
+          </div>
+        </div>
+
+        <!-- 3) Fiesta de la Macha -->
+        <div class="show-group" id="show-macha">
+          <header class="show-header pin" data-aos="fade-up">
+            <div class="header-inner">
+              <h2>Fiesta de la Macha</h2>
+              <p class="subtitle">Teloneo a Zúmbale Primo</p>
+            </div>
+          </header>
+
+          <div class="show-actions" data-aos="fade-up">
+            <a class="btn" href="https://www.youtube.com/watch?v=pV9abyfATls" target="_blank" rel="noopener">Video recopilación</a>
+          </div>
+
+          <article class="show-feature right" data-aos="fade-up">
+            <a class="photo" href="assets/img/Macha 1.jpg" target="_blank" rel="noopener">
+              <span class="year-badge">2025</span>
+              <img src="assets/img/Macha 1.jpg" alt="Macha — main">
+            </a>
+            <div class="info">
+              <h3>Club lleno previo al acto principal</h3>
+              <p>
+                Show de apertura previo a Zúmbale Primo. Formato club, público ya encendido,
+                set corto e intenso.
+              </p>
+              <p>
+                Destacó la interacción con el público y la reacción a los coros.
+              </p>
+            </div>
+          </article>
+
+          <article class="show-feature left" data-aos="fade-up">
+            <a class="photo" href="assets/img/Macha 2.jpg" target="_blank" rel="noopener">
+              <img src="assets/img/Macha 2.jpg" alt="Macha — crowd">
+            </a>
+            <div class="info">
+              <h3>Conexión con la gente</h3>
+              <p>Se probó repertorio propio dentro de una fiesta tropical y funcionó.</p>
+              <p>Material grabado para redes y reel del evento.</p>
+            </div>
+          </article>
+
+          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Macha">
+            <a class="tile" href="assets/img/Macha 3.jpg" target="_blank" rel="noopener">
+              <img src="assets/img/Macha 3.jpg" alt="Detalle 1">
+            </a>
+            <a class="tile" href="assets/img/Macha 4.jpg" target="_blank" rel="noopener">
+              <img src="assets/img/Macha 4.jpg" alt="Detalle 2">
+            </a>
+            <a class="tile" href="assets/img/Macha 5.jpg" target="_blank" rel="noopener">
+              <img src="assets/img/Macha 5.jpg" alt="Detalle 3">
+            </a>
+          </div>
+        </div>
+
+        <!-- 4) Aniversario Educa -->
+        <div class="show-group" id="show-educa">
+          <header class="show-header pin" data-aos="fade-up">
+            <div class="header-inner">
+              <h2>Aniversario Educa</h2>
+              <p class="subtitle">Concepción, Universidad Católica NS</p>
+            </div>
+          </header>
+
+          <div class="show-actions" data-aos="fade-up">
+            <a class="btn" href="#" target="_blank" rel="noopener">Video recopilación</a>
+          </div>
+
+          <article class="show-feature left" data-aos="fade-up">
+            <a class="photo" href="assets/img/educa-1.jpg" target="_blank" rel="noopener">
+              <span class="year-badge">2025</span>
+              <img src="assets/img/educa-1.jpg" alt="Educa — escenario">
+            </a>
+            <div class="info">
+              <h3>Show universitario</h3>
+              <p>
+                Presentación en aniversario, público principalmente estudiantil, con repertorio urbano y fusión pop.
+              </p>
+              <p>
+                Se trabajó imagen de artista emergente local con proyección y se mostraron temas inéditos.
+              </p>
+            </div>
+          </article>
+
+          <article class="show-feature right" data-aos="fade-up">
+            <a class="photo" href="assets/img/educa-2.jpg" target="_blank" rel="noopener">
+              <img src="assets/img/educa-2.jpg" alt="Educa — crowd">
+            </a>
+            <div class="info">
+              <h3>Material para dossier</h3>
+              <p>Evento ideal para fotos de escenario, crowd y close ups.</p>
+            </div>
+          </article>
+
+          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Educa">
+            <a class="tile" href="assets/img/educa-g1.jpg" target="_blank" rel="noopener"><img src="assets/img/educa-g1.jpg" alt="Detalle 1"></a>
+            <a class="tile" href="assets/img/educa-g2.jpg" target="_blank" rel="noopener"><img src="assets/img/educa-g2.jpg" alt="Detalle 2"></a>
+            <a class="tile" href="assets/img/educa-g3.jpg" target="_blank" rel="noopener"><img src="assets/img/educa-g3.jpg" alt="Detalle 3"></a>
+          </div>
+        </div>
+
+        <!-- 5) Segundo Piso -->
+        <div class="show-group" id="show-segundo-piso">
+          <header class="show-header pin" data-aos="fade-up">
+            <div class="header-inner">
+              <h2>Segundo Piso</h2>
+              <p class="subtitle">Mi primer evento</p>
+            </div>
+          </header>
+
+          <div class="show-actions" data-aos="fade-up">
+            <a class="btn ghost" href="https://youtu.be/UgleOeE8kU0?si=c_No1h10Xe9JETeQ" target="_blank" rel="noopener">Transmisión completa</a>
+          </div>
+
+          <article class="show-feature right" data-aos="fade-up">
+            <a class="photo" href="assets/img/Segundo Piso.jpg" target="_blank" rel="noopener">
+              <span class="year-badge">2025</span>
+              <img src="assets/img/Segundo Piso.jpg" alt="Segundo Piso — main">
+            </a>
+            <div class="info">
+              <h3>Inicio de la carrera en vivo</h3>
+              <p>
+                Show en espacio reducido, formato cercano, primera instancia para probar repertorio y puesta en escena.
+              </p>
+              <p>
+                Se generó contenido para redes y se probó la respuesta del público al proyecto Idknoou.
+              </p>
+            </div>
+          </article>
+
+          <article class="show-feature left" data-aos="fade-up">
+            <a class="photo" href="assets/img/Segundo Piso 1.jpg" target="_blank" rel="noopener">
+              <img src="assets/img/Segundo Piso 1.jpg" alt="Segundo Piso — crowd">
+            </a>
+            <div class="info">
+              <h3>Construcción de comunidad</h3>
+              <p>Asistencia de entorno cercano y público nuevo. Buen punto de partida para dossier.</p>
+            </div>
+          </article>
+
+          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Segundo Piso">
+            <a class="tile" href="assets/img/Segundo piso 2.jpg" target="_blank" rel="noopener"><img src="assets/img/Segundo piso 2.jpg" alt="Detalle 1"></a>
+            <a class="tile" href="assets/img/Segundo piso 3.jpg" target="_blank" rel="noopener"><img src="assets/img/Segundo piso 3.jpg" alt="Detalle 2"></a>
+            <a class="tile" href="assets/img/IMG_2588.jpg" target="_blank" rel="noopener"><img src="assets/img/IMG_2588.jpg" alt="Detalle 3"></a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="container">
+      <h2 data-aos="zoom-in">Contacto</h2>
+      <p class="muted" data-aos="fade-up">
+        Correo: <a href="mailto:lapromesaidk.contacto@gmail.com">lapromesaidk.contacto@gmail.com</a>
+      </p>
+
+      <dd class="contact-inline">
+        <dt class="muted" data-aos="fade-up">Contacto (Manager):</dt>
+        <a class="tel" href="tel:+56966486158">+56 9 6648 6158</a>
+
+        <div class="contact-actions">
+          <a class="btn" href="tel:+56966486158" aria-label="Llamar por teléfono">Llamar</a>
+          <a class="btn ghost"
+            href="https://wa.me/56966486158?text=Hola%20Idknoou,%20vengo%20desde%20tu%20web.%20Quiero%20hablar%20de%20shows%20%F0%9F%8E%A4"
+            target="_blank" rel="noopener" aria-label="Hablar por WhatsApp">WhatsApp</a>
+          <a class="btn ghost" href="assets/contact/idknoou.vcf" download="Idknoou.vcf">Guardar contacto</a>
+        </div>
+      </dd>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Idknoou</small>
+    </div>
+  </footer>
+
+  <script>
+    // Año dinámico
+    const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+
+    // AOS
+    window.addEventListener('load', () => { if (window.AOS) AOS.init({
+      offset: 80, duration: 700, easing: 'ease-out-cubic', once: true
+    }); });
+
+    // Scroll suave fallback
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href'); if (!id || id === '#') return;
+        const target = document.querySelector(id); if (!target) return;
+        e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // GSAP animación de bloques
+    window.addEventListener('load', () => {
+      if (!window.gsap || !window.ScrollTrigger) return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      document.querySelectorAll('.show-feature').forEach((block) => {
+        const photo = block.querySelector('.photo');
+        const info  = block.querySelector('.info');
+        const right = block.classList.contains('right');
+
+        gsap.fromTo(photo, { x: right ? 70 : -70, opacity: 0 }, {
+          x: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
+          scrollTrigger: { trigger: block, start: 'top 85%', toggleActions: 'play none none reverse' }
+        });
+
+        gsap.fromTo(info, { x: right ? -70 : 70, opacity: 0 }, {
+          x: 0, opacity: 1, duration: 0.6, ease: 'power2.out', delay: 0.08,
+          scrollTrigger: { trigger: block, start: 'top 85%', toggleActions: 'play none none reverse' }
+        });
+      });
+    });
+
+    // VIDEO DE FONDO aleatorio
+    const bgVideos = [
+      'assets/video/bg-show1.mp4',
+      'assets/video/bg-show2.mp4'
+    ];
+    const randomVideo = bgVideos[Math.floor(Math.random() * bgVideos.length)];
+    const bgVideoEl = document.getElementById('bgVideo');
+    if (bgVideoEl) {
+      bgVideoEl.src = randomVideo;
+      bgVideoEl.addEventListener('canplay', () => {
+        const p = bgVideoEl.play();
+        if (p !== undefined) {
+          p.catch(() => {});
+        }
+      });
+      bgVideoEl.addEventListener('error', () => {
+        bgVideoEl.style.display = 'none';
+      });
+    }
+
+    // STICKY HEADERS: le pone .is-stuck cuando cruza el nav
+    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 60;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+        if (!el.classList.contains('show-header')) return;
+
+        // cuando el header ya quedó debajo del nav
+        if (entry.intersectionRatio === 0 && entry.boundingClientRect.top <= (navH + 2)) {
+          el.classList.add('is-stuck');
+        } else {
+          el.classList.remove('is-stuck');
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: `-${navH}px 0px 0px 0px`,
+      threshold: [0, 1]
+    });
+
+    document.querySelectorAll('.show-header.pin').forEach(h => observer.observe(h));
+
+    // respeta reduce motion
+    try {
+      const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (media.matches && window.ScrollTrigger) ScrollTrigger.killAll();
+    } catch {}
+  </script>
+
+</body>
+</html>

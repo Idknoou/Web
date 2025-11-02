@@ -1,0 +1,154 @@
+﻿/* Base sobria. Después metemos animaciones ricas. */
+:root { --bg:#0b0b0b; --fg:#f2f2f2; --muted:#9a9a9a; --accent:#27e1c1; }
+* { box-sizing:border-box }
+html,body { margin:0; background:var(--bg); color:var(--fg); font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+a { color: var(--accent); text-decoration:none }
+header { position:sticky; top:0; background:#0b0b0bcc; backdrop-filter: blur(8px); padding:12px 16px }
+nav { display:flex; gap:16px; align-items:center }
+.hero { min-height:60vh; display:grid; place-items:center; text-align:center; padding:40px 16px }
+section { padding:56px 16px; border-top:1px solid rgba(255,255,255,.08) }
+h1,h2 { margin:0 0 12px }
+footer { text-align:center; padding:24px 16px; color:var(--muted) }
+@media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; } }
+/* Contenedores y botones */
+.container { width:min(1100px, 92%); margin:0 auto; }
+.muted { color: var(--muted); }
+.btn {
+  display:inline-block; padding:12px 18px; border-radius:14px;
+  background:var(--accent); color:#0b0b0b; font-weight:700;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.btn:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(39,225,193,.25); }
+
+/* Hero */
+.hero { min-height:80vh; display:grid; place-items:center; text-align:center; gap:12px; }
+.hero-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+/* Grid tarjetas */
+.grid { display:grid; grid-template-columns:repeat(12, 1fr); gap:20px; }
+.card { grid-column:span 4; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:18px; }
+.card h3 { margin:6px 0 10px }
+
+/* Lista simple */
+.list { list-style:none; padding:0; margin:8px 0; display:grid; gap:10px; }
+.list li { padding:12px 14px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px; }
+
+/* Sección STACK (sticky gallery) */
+.stack { position:relative; height: 320vh; /* altura de scroll para el efecto */ }
+.stack-inner { position:sticky; top:0; height:100vh; display:grid; place-items:center; }
+.frame {
+  position:absolute; width:min(820px, 90vw); aspect-ratio: 4/3;
+  border-radius:20px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  opacity:0; transform:scale(.92);
+}
+.frame img { width:100%; height:100%; object-fit:cover; display:block; }
+.frame figcaption {
+  position:absolute; left:0; right:0; bottom:0;
+  padding:10px 14px; background:linear-gradient(180deg, transparent, rgba(0,0,0,.65));
+  font-weight:600;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .card { grid-column:span 6; }
+}
+@media (max-width: 640px) {
+  .card { grid-column:span 12; }
+  h1 { font-size: clamp(28px, 9vw, 40px); }
+  h2 { font-size: clamp(22px, 6vw, 32px); }
+}
+/* Titular de cada show */
+.shows { padding: 60px 0; }
+.show-header { text-align:center; margin: 40px 0 24px; }
+.show-header h2 { font-size: clamp(26px, 4.5vw, 44px); margin: 0 0 6px; }
+.show-header .subtitle { color: var(--muted); margin: 0 auto; max-width: 720px; }
+
+/* Bloques alternados */
+.show-feature {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  align-items: center;
+  margin: 22px 0 34px;
+}
+.show-feature.right { grid-template-columns: 1fr 1.15fr; }
+
+/* Foto */
+.show-feature .photo { display:block; border-radius: 18px; overflow: hidden;
+  border:1px solid rgba(255,255,255,.08); box-shadow: 0 18px 50px rgba(0,0,0,.35);
+  transform: translateZ(0); /* evita borrosidad en animación */
+}
+.show-feature .photo img { width:100%; height:100%; object-fit: cover; display:block; aspect-ratio: 4/3; }
+
+/* Info */
+.show-feature .info h3 { margin: 0 0 8px; font-size: clamp(18px, 2.8vw, 26px); }
+.show-feature .info p { margin: 8px 0 0; color: var(--fg); }
+.show-feature .meta { list-style: none; padding: 0; margin: 0 0 8px; color: var(--muted); display: grid; gap: 4px; }
+
+/* Botones */
+.btn { display:inline-block; padding:10px 16px; border-radius:14px; background:var(--accent); color:#0b0b0b; font-weight:700; transition:transform .2s, box-shadow .2s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(39,225,193,.25); }
+.btn.ghost { background: transparent; color: var(--fg); border:1px solid rgba(255,255,255,.18); }
+
+/* Mini-galería por show */
+.show-gallery { display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin: 8px 0 46px; }
+.show-gallery a { grid-column: span 4; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.08); display:block; }
+.show-gallery img { width:100%; height:100%; display:block; object-fit: cover; aspect-ratio: 4/3; filter: saturate(1.05); transition: transform .25s ease; }
+.show-gallery a:hover img { transform: scale(1.03); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .show-feature,
+  .show-feature.right { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .show-gallery a { grid-column: span 12; }
+}
+/* Línea de contacto: número junto al label y botones debajo si hay */
+.contact-inline{
+  display:flex; 
+  align-items:center; 
+  gap:10px; 
+  flex-wrap:wrap;         /* si no cabe, baja a segunda línea sin romper */
+}
+.contact-inline .tel{
+  font-weight:700;        /* haz que el número destaque */
+  text-decoration:none;
+}
+
+/* Por defecto, oculto la botonera en desktop */
+.contact-actions{
+  display:none;
+  gap:10px;
+  margin-top:6px;         /* separación respecto al número */
+}
+.contact-actions .btn{ padding:8px 12px; border-radius:12px; }
+
+/* En móvil/táctil, muestra la botonera */
+@media (hover:none), (pointer:coarse){
+  .contact-actions{ display:flex; flex-wrap:wrap; }
+}
+/* Oculta el cursor de escritura en textos (títulos, párrafos, lista de datos, etc.) */
+h1, h2, h3, h4, p,
+dt, dd, li,
+a, span, small {
+  caret-color: transparent;  /* <-- esto es lo que saca el " | " */
+}
+.bg-video{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.28;     /* AJUSTA AQUÍ qué tan fuerte se ve el video */
+  pointer-events: none;
+}
+header, main, footer{
+  position: relative;
+  z-index: 2;
+}
