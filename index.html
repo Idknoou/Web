@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
@@ -16,46 +16,56 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
 
   <style>
-    :root{
-      /* ALTURA DEL NAV. Si cambias padding del nav, ajusta esto. */
-      --nav-h: 60px;
-      --muted: rgba(255,255,255,.56);
-      --accent: #27e1c1;
-      --fg: #fff;
-    }
+   :root{
+  --nav-h: 60px;
+  --muted: rgba(255,255,255,.56);
+  --accent: #27e1c1;
+  --fg: #fff;
+}
 
-    body{
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color:#fff;
-      background: radial-gradient(circle at top, rgba(0,0,0,.45), rgba(0,0,0,.9));
-    }
-    html{ background:#000; }
+/* 1. achicar todo un poquito */
+body{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color:#fff;
+  background: radial-gradient(circle at top, rgba(0,0,0,.45), rgba(0,0,0,.9));
+  overflow-x: hidden;
+  font-size: 0.95rem;          /* baja todo apenas */
+}
 
-    .container      { width:min(1100px, 92%); margin:0 auto }
-    .container-wide { width:min(1400px, 96%); margin:0 auto }
-    section { padding:70px 0; }
+/* 2. contenedores un poco más angostos */
+.container{
+  width: min(1000px, 88%);
+  margin: 0 auto;
+}
+.container-wide{
+  width: min(1260px, 94%);
+  margin: 0 auto;
+}
+section{ padding: 62px 0; }    /* también los separo un pelito menos */
 
-    /* NAV */
-    header {
-      position:sticky;
-      top:0;
-      z-index:200;
-      background:#0b0b0bcc;
-      backdrop-filter: blur(8px);
-    }
-    nav {
-      height: calc(var(--nav-h) + env(safe-area-inset-top));
-      display:flex;
-      align-items:center;
-      gap:16px;
-      padding-top: env(safe-area-inset-top);
-    }
-    nav a {
-      color:inherit;
-      text-decoration:none;
-      font-weight:600;
-      font-size:.9rem;
-    }
+/* NAV */
+header {
+  position:sticky;
+  top:0;
+  z-index:200;
+  background:#0b0b0bcc;
+  backdrop-filter: blur(8px);
+}
+nav {
+  height: calc(var(--nav-h) + env(safe-area-inset-top));
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding-top: env(safe-area-inset-top);
+}
+/* 3. navbar más grande */
+nav a {
+  color:inherit;
+  text-decoration:none;
+  font-weight:600;
+  font-size:1.02rem;            /* antes .9rem */
+  letter-spacing: .01em;
+}
 
     /* HERO */
     .hero { padding: 20px 0 10px; text-align:center }
@@ -88,76 +98,77 @@
       border-radius: 12px;
     }
 
-    /* =========================
-       SHOWS (parte importante)
-       ========================= */
-    .shows .show-header h2 {
-      font-size: clamp(28px, 6.2vw, 64px);
-      margin:0 0 6px; line-height:1.02;
-    }
-    .shows .show-header .subtitle {
-      color: var(--muted);
-      margin: 0 auto;
-      max-width: 820px
-    }
+/* =========================
+   SHOWS (versión buena)
+   ========================= */
 
-    /* cada grupo de show */
-    .show-group {
-      position: relative;
-      padding-top: calc(var(--nav-h) + 4px);
-      margin-bottom: 54px;
-    }
+/* título normal de los shows */
+.shows .show-header h2 {
+  font-size: clamp(28px, 6.2vw, 64px);
+  margin: 0 0 6px;
+  line-height: 1.02;
+}
+.shows .show-header .subtitle {
+  color: var(--muted);
+  margin: 0 auto;
+  max-width: 820px;
+}
 
-    /* capa sticky (no el contenido) */
-    .show-header.pin{
-      position: sticky;
-      top: calc(var(--nav-h) + env(safe-area-inset-top));
-      z-index: 80;
-      width: 100%;
-      pointer-events: none;   /* el blur no bloquea clicks */
-    }
+/* cada grupo de show */
+.show-group {
+  position: relative;
+  padding-top: calc(var(--nav-h) + 4px);
+  margin-bottom: 54px;
+}
 
-    /* contenido real del header */
-    .show-header.pin .header-inner{
-      pointer-events:auto;
-      width: min(1100px, 96%);
-      margin: 0 auto;
-      text-align:center;
-      padding: 14px 0 12px;
-      position: relative;
-      z-index: 2;
-    }
+/* header que se pega */
+.show-header.pin{
+  position: sticky;
+  top: calc(var(--nav-h) + env(safe-area-inset-top));
+  z-index: 80;
+  width: 100%;
+  pointer-events: none;  /* que el vidrio no tape clicks */
+}
 
-    /* el cristal que aparece cuando está pegado */
-    .show-header.pin::before{
-      content:"";
-      position:absolute;
-      left:50%;
-      transform: translateX(-90%);
-      top:-20px;
-      width: min(1180px, 100vw);
-      height: 130px;
-      /* degradado que nace abajo y se pierde arriba */
-      background: linear-gradient(
-        to top,
-        rgba(5,5,5,.92) 0%,
-        rgba(5,5,5,.55) 46%,
-        rgba(5,5,5,0) 0px
-      );
-      backdrop-filter: blur(18px);
-      opacity:0;
-      transition: opacity .22s ease-out;
-      /* para que no se vea una caja dura a los lados */
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      pointer-events:none;
-    }
+/* contenido que sí se puede clickear */
+.show-header.pin .header-inner{
+  pointer-events: auto;
+  width: min(1100px, 96%);
+  margin: 0 auto;
+  text-align: center;
+  padding: 14px 0 12px;
+  position: relative;
+  z-index: 2;
+}
 
-    /* cuando está pegado al top */
-    .show-header.pin.is-stuck::before{
-      opacity:1;
-    }
+/* EL VIDRIO. ESTE ES EL IMPORTANTE. */
+.show-header.pin::before{
+  content: "";
+  position: absolute;
+  top: -20px;
+  /* lo centramos respecto al viewport */
+  left: calc(50% - 50vw);
+  width: 100vw;              /* UNA pantalla, no 500 */
+  height: 130px;
+  background: linear-gradient(
+    to top,
+    rgba(5,5,5,.92) 0%,
+    rgba(5,5,5,.55) 46%,
+    rgba(5,5,5,0) 100%
+  );
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  transition: opacity .22s ease-out;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  pointer-events: none;
+}
+
+/* cuando se pega, se ve */
+.show-header.pin.is-stuck::before{
+  opacity: 1;
+}
+
+
 
     /* Botonera bajo título */
     .show-actions{
@@ -251,6 +262,37 @@
       }
     }
 
+body{
+  overflow-x: hidden;
+}
+/* por si algún hijo se pasa de vivo */
+main, section, .shows, .show-group{
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* el vidrio en móvil no necesita truco raro de 50vw */
+@media (max-width: 640px){
+  .show-header.pin{
+    overflow: hidden;         /* corta lo que se salga */
+  }
+  .show-header.pin::before{
+    left: 0;
+    width: 100%;
+  }
+
+  /* contenedores más seguros en móvil */
+  .container,
+  .container-wide{
+    width: 92%;
+  }
+
+  /* por si la animación de gsap se sale unos px */
+  .show-feature{
+    overflow: hidden;
+  }
+}
+    
     /* VIDEO DE FONDO */
     .bg-video{
       position: fixed;
@@ -260,9 +302,69 @@
       height: 100vh;
       object-fit: cover;
       z-index: -1;
-      opacity: 0.55;
+      opacity:0.7;
       pointer-events: none;
     }
+
+/* Mensaje flotante */
+.floating-msg{
+  position: fixed;
+  bottom: 18px;
+  left: 18px;                 /* cámbialo a right:18px si lo quieres a la derecha */
+  background: rgba(0,0,0,.78);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  padding: 10px 14px 10px 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  max-width: 260px;
+  font-size: .82rem;
+  line-height: 1.3;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  animation: fadeIn .28s ease-out;
+}
+.floating-msg strong{
+  display:block;
+  font-size: .75rem;
+  letter-spacing:.04em;
+  text-transform: uppercase;
+  color: #27e1c1;
+}
+.floating-msg button{
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,.5);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+.floating-msg a{
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: .75rem;
+}
+.floating-msg a:hover{
+  text-decoration: underline;
+}
+@keyframes fadeIn{
+  from{ opacity:0; transform: translateY(12px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+/* en móvil que no tape tanto */
+@media (max-width: 640px){
+  .floating-msg{
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: none;
+  }
+}
+
 
     main, footer { position: relative; z-index: 2; }
   </style>
@@ -342,9 +444,10 @@
             </div>
           </header>
 
+          <!--
           <div class="show-actions" data-aos="fade-up">
             <a class="btn ghost" href="#" target="_blank" rel="noopener">Video recopilación</a>
-          </div>
+          </div>-->
 
           <article class="show-feature left" data-aos="fade-up">
             <a class="photo" href="assets/img/m3.JPG" target="_blank" rel="noopener">
@@ -397,7 +500,11 @@
           </header>
 
           <div class="show-actions" data-aos="fade-up">
-            <a class="btn ghost" href="https://youtu.be/Dwiox4WpqZs?t=7066" target="_blank" rel="noopener">Transmisión completa</a>
+            <a class="btn ghost" href="" target="_blank" rel="noopener">Transmisión completa</a>
+          </div>
+
+          <div class="show-actions" data-aos="fade-up">
+            <a class="btn" href="https://youtu.be/Dwiox4WpqZs?t=7066" target="_blank" rel="noopener">Ver Transmisión</a>
           </div>
 
           <article class="show-feature right" data-aos="fade-up">
@@ -501,14 +608,14 @@
             </div>
           </header>
 
-          <div class="show-actions" data-aos="fade-up">
-            <a class="btn" href="#" target="_blank" rel="noopener">Video recopilación</a>
-          </div>
+          <!--<div class="show-actions" data-aos="fade-up">
+            <a class="btn ghost" href="#" target="_blank" rel="noopener">Video recopilación</a>
+          </div>-->
 
           <article class="show-feature left" data-aos="fade-up">
-            <a class="photo" href="assets/img/educa-1.jpg" target="_blank" rel="noopener">
+            <a class="photo" href="assets/img/a.png" target="_blank" rel="noopener">
               <span class="year-badge">2025</span>
-              <img src="assets/img/educa-1.jpg" alt="Educa — escenario">
+              <img src="assets/img/a.png" alt="Educa — escenario">
             </a>
             <div class="info">
               <h3>Show universitario</h3>
@@ -522,8 +629,8 @@
           </article>
 
           <article class="show-feature right" data-aos="fade-up">
-            <a class="photo" href="assets/img/educa-2.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/educa-2.jpg" alt="Educa — crowd">
+            <a class="photo" href="assets/img/a4.png" target="_blank" rel="noopener">
+              <img src="assets/img/a4.png" alt="Educa — crowd">
             </a>
             <div class="info">
               <h3>Material para dossier</h3>
@@ -532,9 +639,9 @@
           </article>
 
           <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Educa">
-            <a class="tile" href="assets/img/educa-g1.jpg" target="_blank" rel="noopener"><img src="assets/img/educa-g1.jpg" alt="Detalle 1"></a>
-            <a class="tile" href="assets/img/educa-g2.jpg" target="_blank" rel="noopener"><img src="assets/img/educa-g2.jpg" alt="Detalle 2"></a>
-            <a class="tile" href="assets/img/educa-g3.jpg" target="_blank" rel="noopener"><img src="assets/img/educa-g3.jpg" alt="Detalle 3"></a>
+            <a class="tile" href="assets/img/a3.png" target="_blank" rel="noopener"><img src="assets/img/a3.png" alt="Detalle 1"></a>
+            <a class="tile" href="assets/img/a5.JPG" target="_blank" rel="noopener"><img src="assets/img/a5.JPG" alt="Detalle 2"></a>
+            <a class="tile" href="assets/img/a2.png" target="_blank" rel="noopener"><img src="assets/img/a2.png" alt="Detalle 3"></a>
           </div>
         </div>
 
@@ -550,6 +657,10 @@
           <div class="show-actions" data-aos="fade-up">
             <a class="btn ghost" href="https://youtu.be/UgleOeE8kU0?si=c_No1h10Xe9JETeQ" target="_blank" rel="noopener">Transmisión completa</a>
           </div>
+
+           <!--<div class="show-actions" data-aos="fade-up">
+            <a class="btn" href="https://youtu.be/Dwiox4WpqZs?t=7066" target="_blank" rel="noopener">Ver Transmisión</a>
+          </div>-->
 
           <article class="show-feature right" data-aos="fade-up">
             <a class="photo" href="assets/img/Segundo Piso.jpg" target="_blank" rel="noopener">
@@ -616,6 +727,12 @@
   </footer>
 
   <script>
+
+    setTimeout(() => {
+    const el = document.getElementById('lastDropMsg');
+    if (el) el.style.display = 'flex';
+  }, 3566);
+
     // Año dinámico
     const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
 
@@ -683,7 +800,6 @@
         const el = entry.target;
         if (!el.classList.contains('show-header')) return;
 
-        // cuando el header ya quedó debajo del nav
         if (entry.intersectionRatio === 0 && entry.boundingClientRect.top <= (navH + 2)) {
           el.classList.add('is-stuck');
         } else {
@@ -704,6 +820,19 @@
       if (media.matches && window.ScrollTrigger) ScrollTrigger.killAll();
     } catch {}
   </script>
+
+<div class="floating-msg" id="lastDropMsg" style="display:none">
+  <div>
+    <strong>Nuevo</strong>
+    Escucha lo último de Idknoou.
+    <br>
+    <a href="https://open.spotify.com/artist/65m6UOB4ekojjqf7FOYqPo" target="_blank" rel="noopener">
+      Abrir en Spotify →
+    </a>
+  </div>
+  <button type="button" aria-label="Cerrar" onclick="document.getElementById('lastDropMsg').remove()">×</button>
+</div>
+
 
 </body>
 </html>
