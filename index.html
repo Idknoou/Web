@@ -477,49 +477,31 @@ section{ padding: 58px 0; }       /* también un poquito menos de alto */
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  max-width: 240px;
 }
 
-.logo-pre {
-  font-size: 2.2rem;
-  letter-spacing: .04em;
-  margin-bottom: 6px;
-  text-shadow: 0 0 14px rgba(255,255,255,.25);
+.spinner {
+  width: 46px;
+  height: 46px;
+  border: 3px solid rgba(255,255,255,.12);
+  border-top-color: #27e1c1;
+  border-radius: 999px;
+  margin: 0 auto 14px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .pre-text {
   color: rgba(255,255,255,.6);
   font-size: .8rem;
-  margin-bottom: 14px;
-}
-
-.pre-bar {
-  width: 180px;
-  height: 5px;
-  background: rgba(255,255,255,.06);
-  border-radius: 999px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.pre-bar-fill {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #27e1c1, #ffffff);
-  border-radius: inherit;
-  animation: prefill 2.4s ease-in-out infinite;
-}
-
-@keyframes prefill {
-  0% { width: 0; }
-  50% { width: 90%; }
-  100% { width: 0; }
 }
 
 body.preloaded #preloader {
   opacity: 0;
   pointer-events: none;
-  transition: opacity .3s ease-out;
+  transition: opacity .25s ease-out;
 }
 </style>
 
@@ -528,11 +510,11 @@ body.preloaded #preloader {
 
   <div id="preloader">
     <div class="preloader-inner">
-      <h1 class="logo-pre">Idknoou</h1>
-      <p class="pre-text">Cargando show...</p>
-      <div class="pre-bar">
-        <div class="pre-bar-fill"></div>
-      </div>
+      
+      <h1 class="logo-pre glowPulse glow-loop">Idknoou</h1>
+      <div class="spinner"></div>
+      <p class="pre-text">Espere mientras carga la página...</p>
+      
     </div>
   </div>
 
@@ -581,277 +563,247 @@ body.preloaded #preloader {
   </div>
 </section>
 
-    <!-- SHOWS -->
-    <section id="shows" class="shows">
-      <div class="container-wide">
+<!-- SHOWS -->
+<section id="shows" class="shows">
+  <div class="container-wide">
 
-        <!-- 1) Fiestas Patrias -->
-        <div class="show-group" id="show-fiestas-patrias">
-          <div class="show-header pin" data-aos="fade-up">
-            <div class="header-inner">
-              <h2 class="glow-strong">Fiestas Patrias</h2>
-              <p class="subtitle">Hualpén</p>
-            </div>
-          </header>
-
-          <!--
-          <div class="show-actions" data-aos="fade-up">
-            <a class="btn ghost" href="#" target="_blank" rel="noopener">Video recopilación</a>
-          </div>-->
-
-          <article class="show-feature left" data-aos="fade-up">
-            <a class="photo" href="assets/img/m3.JPG" target="_blank" rel="noopener">
-              <span class="year-badge">2025</span>
-              <img src="assets/img/m3.JPG" alt="Fiestas Patrias — escena">
-            </a>
-            <div class="info">
-              <h3>Show masivo en Hualpén</h3>
-              <p>
-                Presentación en el marco de las Fiestas Patrias, dentro de un evento abierto y familiar que reunió a más de <span class="glow-strong">30.000</span>  asistentes. 
-              <p>
-                Apertura urbana del show de Agrupación Marilyn, con repertorio propio y adaptaciones de covers.
-Durante el show se lanzó merchandising y dulces Fini al público, generando una interacción cercana con las familias.
-              </p>
-            </div>
-          </article>
-
-          <article class="show-feature right" data-aos="fade-up">
-            <a class="photo" href="assets/img/m1.JPG" target="_blank" rel="noopener">
-              <img src="assets/img/m1.JPG" alt="Fiestas Patrias — crowd">
-            </a>
-            <div class="info">
-              <h3 class="glow-strong">Recepción</h3>
-              <p>Segmento bailable y dinámico que preparó al público para el acto principal.
-El show se desarrolló en formato reducido con pistas originales, manteniendo energía constante durante toda la presentación.</p>
-            </div>
-          </article>
-
-          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Fiestas Patrias">
-            <a class="tile" href="assets/img/m2.JPG" target="_blank" rel="noopener">
-              <img src="assets/img/m2.JPG" alt="Detalle 1">
-            </a>
-            <a class="tile" href="assets/img/m.JPG" target="_blank" rel="noopener">
-              <img src="assets/img/m.JPG" alt="Detalle 2">
-            </a>
-            <a class="tile" href="assets/img/m4.JPG" target="_blank" rel="noopener">
-              <img src="assets/img/m4.JPG" alt="Detalle 3">
-            </a>
-          </div>
+    <!-- 1) Fiestas Patrias -->
+    <div class="show-group" id="show-fiestas-patrias">
+      <div class="show-header pin" data-aos="fade-up">
+        <div class="header-inner">
+          <h2 class="glow-strong">Fiestas Patrias</h2>
+          <p class="subtitle">Hualpén</p>
         </div>
-
-        <!-- 2) Festival Graneros de Chile -->
-        <div class="show-group" id="show-graneros">
-          <div class="show-header pin" data-aos="fade-up">
-            <div class="header-inner">
-              <h2 class="glow-strong">Festival Graneros de Chile</h2>
-              <p class="subtitle">Traiguén</p>
-            </div>
-          </header>
-
-           <!--<div class="show-actions" data-aos="fade-up">
-            <a class="btn ghost" href="" target="_blank" rel="noopener">Transmisión completa</a>
-          </div>-->
-
-          <div class="show-actions" data-aos="fade-up">
-            <a class="btn" href="https://youtu.be/Dwiox4WpqZs?t=7066" target="_blank" rel="noopener">Ver Transmisión</a>
-          </div>
-
-          <article class="show-feature right" data-aos="fade-up">
-            <a class="photo" href="assets/img/g.jpg" target="_blank" rel="noopener">
-              <span class="year-badge">2025</span>
-              <img src="assets/img/g.jpg" alt="Graneros — main">
-            </a>
-            <div class="info">
-              <h3 class="glow-strong">Presentación festivalera</h3>
-              <p>
-                Set urbano dentro del festival regional, transmitido en vivo por streaming y ante un público superior a <span class="glow-strong">14.000</span>.
-              </p>
-              <p>La transmisión alcanzó más de <span class="glow-strong">160.000</span> visualizaciones en YouTube, consolidando presencia en plataformas digitales.</p>
-              <p>
-                Repertorio centrado en energía y participación del público.
-              </p>
-            </div>
-          </article>
-
-          <article class="show-feature left" data-aos="fade-up">
-            <a class="photo" href="assets/img/g1.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/g1.jpg" alt="Graneros — crowd">
-            </a>
-            <div class="info">
-              <h3 class="glow-strong">Highlights</h3>
-              <p>Los temas más rítmicos marcaron buena respuesta del público y conexión con la animación del evento.
-Se fortaleció la imagen de artista urbano chileno con proyección nacional.</p>
-             
-            </div>
-          </article>
-
-          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Graneros">
-            <a class="tile" href="assets/img/g2.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/g2.jpg" alt="Detalle 1">
-            </a>
-            <a class="tile" href="assets/img/g3.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/g3.jpg" alt="Detalle 2">
-            </a>
-          </div>
-        </div>
-
-        <!-- 3) Fiesta de la Macha -->
-        <div class="show-group" id="show-macha">
-          <div class="show-header pin" data-aos="fade-up">
-            <div class="header-inner">
-              <h2 class="glow-strong">Fiesta de la Macha</h2>
-              <p class="subtitle">Hualpén, Caleta Lenga</p>
-            </div>
-          </header>
-
-          <div class="show-actions" data-aos="fade-up">
-            <a class="btn" href="https://www.youtube.com/watch?v=pV9abyfATls" target="_blank" rel="noopener">Video recopilación</a>
-          </div>
-
-          <article class="show-feature right" data-aos="fade-up">
-            <a class="photo" href="assets/img/Macha 1.jpg" target="_blank" rel="noopener">
-              <span class="year-badge">2025</span>
-              <img src="assets/img/Macha 1.jpg" alt="Macha — main">
-            </a>
-            <div class="info">
-              <h3 class="glow-strong">Club lleno previo al acto principal</h3>
-              <p>
-                Show de apertura previo a <span class="glow-strong">Zúmbale Primo</span>, con más de <span class="glow-strong">10.000</span> asistentes en formato de fiesta popular al aire libre.
-              </p>
-              <p>
-                Set corto e intenso, con fuerte conexión con el público y coros participativos.
-Durante la presentación se lanzaron dulces Fini como parte de la dinámica escénica, reforzando la cercanía con la audiencia.
-              </p>
-            </div>
-          </article>
-
-          <article class="show-feature left" data-aos="fade-up">
-            <a class="photo" href="assets/img/Macha 2.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/Macha 2.jpg" alt="Macha — crowd">
-            </a>
-            <div class="info">
-              <h3 class="glow-strong">Conexión con la gente</h3>
-              <p>El repertorio propio se integró con éxito en un contexto tropical, validando versatilidad escénica y cercanía.
-Material grabado y utilizado para contenido audiovisual del artista.</p>
-              
-            </div>
-          </article>
-
-          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Macha">
-            <a class="tile" href="assets/img/Macha 3.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/Macha 3.jpg" alt="Detalle 1">
-            </a>
-            <a class="tile" href="assets/img/Macha 4.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/Macha 4.jpg" alt="Detalle 2">
-            </a>
-            <a class="tile" href="assets/img/Macha 5.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/Macha 5.jpg" alt="Detalle 3">
-            </a>
-          </div>
-        </div>
-
-        <!-- 4) Aniversario Educa -->
-        <div class="show-group" id="show-educa">
-          <div class="show-header pin" data-aos="fade-up">
-            <div class="header-inner">
-              <h2 class="glow-strong">Aniversario Educa</h2>
-              <p class="subtitle">Concepción, Universidad Católica</p>
-            </div>
-          </header>
-
-          <!--<div class="show-actions" data-aos="fade-up">
-            <a class="btn ghost" href="#" target="_blank" rel="noopener">Video recopilación</a>
-          </div>-->
-
-          <article class="show-feature left" data-aos="fade-up">
-            <a class="photo" href="assets/img/a.png" target="_blank" rel="noopener">
-              <span class="year-badge">2025</span>
-              <img src="assets/img/a.png" alt="Educa — escenario">
-            </a>
-            <div class="info">
-              <h3 class="glow-strong">Show universitario</h3>
-              <p>
-                Presentación en el aniversario institucional con público principalmente estudiantil.
-Set urbano con fusión pop, mostrando temas inéditos y propuesta de artista emergente local con proyección.
-              </p>
-              <p>
-                Se mantuvo la interacción con el público lanzando dulces Fini, parte del sello distintivo del proyecto en vivo y se mostraron temas inéditos.
-              </p>
-            </div>
-          </article>
-
-          <article class="show-feature right" data-aos="fade-up">
-            <a class="photo" href="assets/img/a4.png" target="_blank" rel="noopener">
-              <img src="assets/img/a4.png" alt="Educa — crowd">
-            </a>
-            <div class="info">
-              <h3 class="glow-strong">Material para dossier</h3>
-              <p>Instancia ideal para capturar fotos de escenario, público y planos de interacción.
-Evento registrado para material promocional y dossier de prensa.</p>
-            </div>
-          </article>
-
-          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Educa">
-            <a class="tile" href="assets/img/a3.png" target="_blank" rel="noopener"><img src="assets/img/a3.png" alt="Detalle 1"></a>
-            <a class="tile" href="assets/img/a5.JPG" target="_blank" rel="noopener"><img src="assets/img/a5.JPG" alt="Detalle 2"></a>
-            <a class="tile" href="assets/img/a2.png" target="_blank" rel="noopener"><img src="assets/img/a2.png" alt="Detalle 3"></a>
-          </div>
-        </div>
-
-        <!-- 5) Segundo Piso -->
-        <div class="show-group" id="show-segundo-piso">
-          <div class="show-header pin" data-aos="fade-up">
-            <div class="header-inner">
-              <h2 class="glow-strong">Show Segundo Piso</h2>
-              <p class="subtitle">Concepción</p>
-            </div>
-          </header>
-
-          <div class="show-actions" data-aos="fade-up">
-            <a class="btn ghost" href="https://youtu.be/UgleOeE8kU0?si=c_No1h10Xe9JETeQ" target="_blank" rel="noopener">Transmisión completa</a>
-          </div>
-
-           <!--<div class="show-actions" data-aos="fade-up">
-            <a class="btn" href="https://youtu.be/Dwiox4WpqZs?t=7066" target="_blank" rel="noopener">Ver Transmisión</a>
-          </div>-->
-
-          <article class="show-feature right" data-aos="fade-up">
-            <a class="photo" href="assets/img/Segundo Piso.jpg" target="_blank" rel="noopener">
-              <span class="year-badge">2025</span>
-              <img src="assets/img/Segundo Piso.jpg" alt="Segundo Piso — main">
-            </a>
-            <div class="info">
-              <h3 class="glow-strong">Inicio de la carrera en vivo</h3>
-              <p>
-                Primera instancia en vivo del proyecto Idknoou. Show en formato íntimo, pensado para probar repertorio, energía escénica y respuesta del público.
-              </p>
-              <p>Fue la primera vez que se lanzaron dulces Fini al público, marcando el inicio de una tradición dentro de las presentaciones del proyecto.</p>
-              <p>
-                Se generó contenido audiovisual para redes y material de promoción artística.
-              </p>
-            </div>
-          </article>
-
-          <article class="show-feature left" data-aos="fade-up">
-            <a class="photo" href="assets/img/Segundo Piso 1.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/Segundo Piso 1.jpg" alt="Segundo Piso — crowd">
-            </a>
-            <div class="info">
-              <h3 class="glow-strong">Construcción de comunidad</h3>
-              <p>Asistencia de entorno cercano y público nuevo.
-Instancia clave para dar inicio al desarrollo de una comunidad artística alrededor del proyecto.</p>
-            </div>
-          </article>
-
-          <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Segundo Piso">
-            <a class="tile" href="assets/img/Segundo piso 2.jpg" target="_blank" rel="noopener"><img src="assets/img/Segundo piso 2.jpg" alt="Detalle 1"></a>
-            <a class="tile" href="assets/img/Segundo piso 3.jpg" target="_blank" rel="noopener"><img src="assets/img/Segundo piso 3.jpg" alt="Detalle 2"></a>
-            <a class="tile" href="assets/img/IMG_2588.jpg" target="_blank" rel="noopener"><img src="assets/img/IMG_2588.jpg" alt="Detalle 3"></a>
-          </div>
-        </div>
-
       </div>
-    </section>
+
+      <article class="show-feature left" data-aos="fade-up">
+        <a class="photo" href="assets/img/m3.JPG" target="_blank" rel="noopener">
+          <span class="year-badge">2025</span>
+          <img src="assets/img/comprimidas/comp-m3.JPG" alt="Fiestas Patrias — escena" loading="lazy">
+        </a>
+        <div class="info">
+          <h3>Show masivo en Hualpén</h3>
+          <p>
+            Presentación en el marco de las Fiestas Patrias, dentro de un evento abierto y familiar que reunió a más de <span class="glow-strong">30.000</span> asistentes.
+          </p>
+          <p>
+            Apertura urbana del show de Agrupación Marilyn, con repertorio propio y adaptaciones de covers. Durante el show se lanzó merchandising y dulces Fini al público, generando una interacción cercana con las familias.
+          </p>
+        </div>
+      </article>
+
+      <article class="show-feature right" data-aos="fade-up">
+        <a class="photo" href="assets/img/m1.JPG" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-m1.JPG" alt="Fiestas Patrias — crowd" loading="lazy">
+        </a>
+        <div class="info">
+          <h3 class="glow-strong">Recepción</h3>
+          <p>Segmento bailable y dinámico que preparó al público para el acto principal. El show se desarrolló en formato reducido con pistas originales, manteniendo energía constante durante toda la presentación.</p>
+        </div>
+      </article>
+
+      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Fiestas Patrias">
+        <a class="tile" href="assets/img/m2.JPG" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-m2.JPG" alt="Detalle 1" loading="lazy">
+        </a>
+        <a class="tile" href="assets/img/m.JPG" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-m.JPG" alt="Detalle 2" loading="lazy">
+        </a>
+        <a class="tile" href="assets/img/m4.JPG" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-m4.JPG" alt="Detalle 3" loading="lazy">
+        </a>
+      </div>
+    </div>
+
+    <!-- 2) Festival Graneros de Chile -->
+    <div class="show-group" id="show-graneros">
+      <div class="show-header pin" data-aos="fade-up">
+        <div class="header-inner">
+          <h2 class="glow-strong">Festival Graneros de Chile</h2>
+          <p class="subtitle">Traiguén</p>
+        </div>
+      </div>
+
+      <div class="show-actions" data-aos="fade-up">
+        <a class="btn" href="https://youtu.be/Dwiox4WpqZs?t=7066" target="_blank" rel="noopener">Ver Transmisión</a>
+      </div>
+
+      <article class="show-feature right" data-aos="fade-up">
+        <a class="photo" href="assets/img/g.jpg" target="_blank" rel="noopener">
+          <span class="year-badge">2025</span>
+          <img src="assets/img/comprimidas/comp-g.jpg" alt="Graneros — main" loading="lazy">
+        </a>
+        <div class="info">
+          <h3 class="glow-strong">Presentación festivalera</h3>
+          <p>Set urbano dentro del festival regional, transmitido en vivo por streaming y ante un público superior a <span class="glow-strong">14.000</span>.</p>
+          <p>La transmisión alcanzó más de <span class="glow-strong">160.000</span> visualizaciones en YouTube, consolidando presencia en plataformas digitales.</p>
+          <p>Repertorio centrado en energía y participación del público.</p>
+        </div>
+      </article>
+
+      <article class="show-feature left" data-aos="fade-up">
+        <a class="photo" href="assets/img/g1.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-g1.jpg" alt="Graneros — crowd" loading="lazy">
+        </a>
+        <div class="info">
+          <h3 class="glow-strong">Highlights</h3>
+          <p>Los temas más rítmicos marcaron buena respuesta del público y conexión con la animación del evento. Se fortaleció la imagen de artista urbano chileno con proyección nacional.</p>
+        </div>
+      </article>
+
+      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Graneros">
+        <a class="tile" href="assets/img/g2.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-g2.jpg" alt="Detalle 1" loading="lazy">
+        </a>
+        <a class="tile" href="assets/img/g3.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-g3.jpg" alt="Detalle 2" loading="lazy">
+        </a>
+      </div>
+    </div>
+
+    <!-- 3) Fiesta de la Macha -->
+    <div class="show-group" id="show-macha">
+      <div class="show-header pin" data-aos="fade-up">
+        <div class="header-inner">
+          <h2 class="glow-strong">Fiesta de la Macha</h2>
+          <p class="subtitle">Hualpén, Caleta Lenga</p>
+        </div>
+      </div>
+
+      <div class="show-actions" data-aos="fade-up">
+        <a class="btn" href="https://www.youtube.com/watch?v=pV9abyfATls" target="_blank" rel="noopener">Video recopilación</a>
+      </div>
+
+      <article class="show-feature right" data-aos="fade-up">
+        <a class="photo" href="assets/img/Macha 1.jpg" target="_blank" rel="noopener">
+          <span class="year-badge">2025</span>
+          <img src="assets/img/comprimidas/comp-Macha 1.jpg" alt="Macha — main" loading="lazy">
+        </a>
+        <div class="info">
+          <h3 class="glow-strong">Club lleno previo al acto principal</h3>
+          <p>Show de apertura previo a <span class="glow-strong">Zúmbale Primo</span>, con más de <span class="glow-strong">10.000</span> asistentes en formato de fiesta popular al aire libre.</p>
+          <p>Set corto e intenso, con fuerte conexión con el público y coros participativos. Durante la presentación se lanzaron dulces Fini como parte de la dinámica escénica.</p>
+        </div>
+      </article>
+
+      <article class="show-feature left" data-aos="fade-up">
+        <a class="photo" href="assets/img/Macha 2.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-Macha 2.jpg" alt="Macha — crowd" loading="lazy">
+        </a>
+        <div class="info">
+          <h3 class="glow-strong">Conexión con la gente</h3>
+          <p>El repertorio propio se integró con éxito en un contexto tropical, validando versatilidad escénica y cercanía. Material grabado y utilizado para contenido audiovisual del artista.</p>
+        </div>
+      </article>
+
+      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Macha">
+        <a class="tile" href="assets/img/Macha 3.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-Macha 3.jpg" alt="Detalle 1" loading="lazy">
+        </a>
+        <a class="tile" href="assets/img/Macha 4.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-Macha 4.jpg" alt="Detalle 2" loading="lazy">
+        </a>
+        <a class="tile" href="assets/img/Macha 5.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-Macha 5.jpg" alt="Detalle 3" loading="lazy">
+        </a>
+      </div>
+    </div>
+
+    <!-- 4) Aniversario Educa -->
+    <div class="show-group" id="show-educa">
+      <div class="show-header pin" data-aos="fade-up">
+        <div class="header-inner">
+          <h2 class="glow-strong">Aniversario Educa</h2>
+          <p class="subtitle">Concepción, Universidad Católica</p>
+        </div>
+      </div>
+
+      <article class="show-feature left" data-aos="fade-up">
+        <a class="photo" href="assets/img/a.png" target="_blank" rel="noopener">
+          <span class="year-badge">2025</span>
+          <img src="assets/img/comprimidas/comp-a.png" alt="Educa — escenario" loading="lazy">
+        </a>
+        <div class="info">
+          <h3 class="glow-strong">Show universitario</h3>
+          <p>Presentación en el aniversario institucional con público principalmente estudiantil. Set urbano con fusión pop, mostrando temas inéditos y propuesta de artista emergente local con proyección.</p>
+          <p>Se mantuvo la interacción con el público lanzando dulces Fini, parte del sello distintivo del proyecto en vivo.</p>
+        </div>
+      </article>
+
+      <article class="show-feature right" data-aos="fade-up">
+        <a class="photo" href="assets/img/a4.png" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-a4.png" alt="Educa — crowd" loading="lazy">
+        </a>
+        <div class="info">
+          <h3 class="glow-strong">Material para dossier</h3>
+          <p>Instancia ideal para capturar fotos de escenario, público y planos de interacción. Evento registrado para material promocional y dossier de prensa.</p>
+        </div>
+      </article>
+
+      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Educa">
+        <a class="tile" href="assets/img/a3.png" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-a3.png" alt="Detalle 1" loading="lazy">
+        </a>
+        <a class="tile" href="assets/img/a5.JPG" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-a5.JPG" alt="Detalle 2" loading="lazy">
+        </a>
+        <a class="tile" href="assets/img/a2.png" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-a2.png" alt="Detalle 3" loading="lazy">
+        </a>
+      </div>
+    </div>
+
+    <!-- 5) Segundo Piso -->
+    <div class="show-group" id="show-segundo-piso">
+      <div class="show-header pin" data-aos="fade-up">
+        <div class="header-inner">
+          <h2 class="glow-strong">Show Segundo Piso</h2>
+          <p class="subtitle">Concepción</p>
+        </div>
+      </div>
+
+      <div class="show-actions" data-aos="fade-up">
+        <a class="btn ghost" href="https://youtu.be/UgleOeE8kU0?si=c_No1h10Xe9JETeQ" target="_blank" rel="noopener">Transmisión completa</a>
+      </div>
+
+      <article class="show-feature right" data-aos="fade-up">
+        <a class="photo" href="assets/img/Segundo Piso.jpg" target="_blank" rel="noopener">
+          <span class="year-badge">2025</span>
+          <img src="assets/img/comprimidas/comp-Segundo Piso.jpg" alt="Segundo Piso — main" loading="lazy">
+        </a>
+        <div class="info">
+          <h3 class="glow-strong">Inicio de la carrera en vivo</h3>
+          <p>Primera instancia en vivo del proyecto Idknoou. Show en formato íntimo, pensado para probar repertorio, energía escénica y respuesta del público.</p>
+          <p>Fue la primera vez que se lanzaron dulces Fini al público, marcando el inicio de una tradición dentro de las presentaciones del proyecto.</p>
+          <p>Se generó contenido audiovisual para redes y material de promoción artística.</p>
+        </div>
+      </article>
+
+      <article class="show-feature left" data-aos="fade-up">
+        <a class="photo" href="assets/img/Segundo Piso 1.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-Segundo Piso 1.jpg" alt="Segundo Piso — crowd" loading="lazy">
+        </a>
+        <div class="info">
+          <h3 class="glow-strong">Construcción de comunidad</h3>
+          <p>Asistencia de entorno cercano y público nuevo. Instancia clave para dar inicio al desarrollo de una comunidad artística alrededor del proyecto.</p>
+        </div>
+      </article>
+
+      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Segundo Piso">
+        <a class="tile" href="assets/img/Segundo piso 2.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-Segundo piso 2.jpg" alt="Detalle 1" loading="lazy">
+        </a>
+        <a class="tile" href="assets/img/Segundo piso 3.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-Segundo piso 3.jpg" alt="Detalle 2" loading="lazy">
+        </a>
+        <a class="tile" href="assets/img/IMG_2588.jpg" target="_blank" rel="noopener">
+          <img src="assets/img/comprimidas/comp-IMG_2588.jpg" alt="Detalle 3" loading="lazy">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <!-- CONTACTO -->
     <section id="contacto" class="container">
@@ -881,18 +833,18 @@ Instancia clave para dar inicio al desarrollo de una comunidad artística alrede
     </div>
   </footer>
 
-  <script>
-  // mostrar mensaje flotante después de un rato
+<script>
+  // mensaje flotante después de un rato
   setTimeout(() => {
     const el = document.getElementById('lastDropMsg');
     if (el) el.style.display = 'flex';
   }, 3566);
 
-  // Año dinámico
+  // año dinámico
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  // Scroll suave fallback
+  // scroll suave
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href');
@@ -904,7 +856,7 @@ Instancia clave para dar inicio al desarrollo de una comunidad artística alrede
     });
   });
 
-  // VIDEO DE FONDO aleatorio
+  // video de fondo aleatorio
   const bgVideos = [
     'assets/video/bg-show1.mp4',
     'assets/video/bg-show2.mp4'
@@ -924,9 +876,9 @@ Instancia clave para dar inicio al desarrollo de una comunidad artística alrede
     });
   }
 
-  // cuando cargue todo
+  // todo lo que depende de que la página cargue
   window.addEventListener('load', () => {
-    // AOS
+    /* ================= AOS ================= */
     if (window.AOS) {
       AOS.init({
         offset: 80,
@@ -936,7 +888,7 @@ Instancia clave para dar inicio al desarrollo de una comunidad artística alrede
       });
     }
 
-    // GSAP animación de bloques
+    /* ================= GSAP ================= */
     if (window.gsap && window.ScrollTrigger) {
       gsap.registerPlugin(ScrollTrigger);
 
@@ -957,154 +909,132 @@ Instancia clave para dar inicio al desarrollo de una comunidad artística alrede
       });
     }
 
-    // si en algún momento creas un observer, recién ahí observas
-    if (typeof observer !== 'undefined') {
-      document.querySelectorAll('.show-header.pin').forEach(h => observer.observe(h));
-    }
+    /* =========== efecto de tipeo en el hero =========== */
+    const subtitleTarget = document.getElementById('hero-subtitle');
+    const titleEl = document.getElementById('hero-title');
 
-    // efecto de tipeo en el hero
-const subtitleTarget = document.getElementById('hero-subtitle');
-const titleEl = document.getElementById('hero-title'); // tu <h1> tiene que tener este id
+    let typingTimeout = null;
+    let wasDown = false;
+    let currentPhrase = "";
 
-if (subtitleTarget) {
-  const phrases = [
-    "Esto es música para las señoritas.",
-    "Esto recién empieza, la promesa.",
-    "Maaami vuelve... que te quiero otra vez.",
-    "Como tú no hay dos milloness.",
-    "¡EY!",
-    "¡IdkOnTheBeats!"
-  ];
+    const phrases = [
+      "Esto es música para las señoritas.",
+      "Esto recién empieza, la promesa.",
+      "Maaami vuelve... que te quiero otra vez.",
+      "Como tú no hay dos milloness.",
+      "¡EY!",
+      "¡IdkOnTheBeats!"
+    ];
 
-  let currentPhrase = "";
-  let typingTimeout = null;
-  let wasDown = false; // para saber si ya bajaste
-
-  function getRandomPhrase(except) {
-    let p = phrases[Math.floor(Math.random() * phrases.length)];
-    if (except && phrases.length > 1) {
-      while (p === except) {
-        p = phrases[Math.floor(Math.random() * phrases.length)];
+    function getRandomPhrase(except) {
+      let p = phrases[Math.floor(Math.random() * phrases.length)];
+      if (except && phrases.length > 1) {
+        while (p === except) {
+          p = phrases[Math.floor(Math.random() * phrases.length)];
+        }
       }
+      return p;
     }
-    return p;
-  }
 
-  function clearTyping() {
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
-      typingTimeout = null;
-    }
-    subtitleTarget.textContent = "";
-  }
-
-  function startTyping(phrase) {
-    clearTyping();
-    currentPhrase = phrase;
-    let i = 0;
-    const speed = 75;
-
-    function typeNext() {
-      if (i <= phrase.length) {
-        subtitleTarget.textContent = phrase.slice(0, i);
-        i++;
-        typingTimeout = setTimeout(typeNext, speed);
+    function clearTyping() {
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+        typingTimeout = null;
       }
+      if (subtitleTarget) subtitleTarget.textContent = "";
     }
-    typeNext();
-  }
 
-  // primera vez
-  setTimeout(() => {
-    startTyping(getRandomPhrase());
-  }, 450);
-
-  // click en el título
-  if (titleEl) {
-    titleEl.addEventListener('click', () => {
-      const newPhrase = getRandomPhrase(currentPhrase);
-      startTyping(newPhrase);
-    });
-  }
-
-  // click en el subtítulo
-  subtitleTarget.parentElement.addEventListener('click', () => {
-    const newPhrase = getRandomPhrase(currentPhrase);
-    startTyping(newPhrase);
-  });
-
-  // scroll: si bajas se borra, si vuelves arriba se escribe otra
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY || window.pageYOffset;
-
-    // bajó
-    if (y > 120 && !wasDown) {
-      wasDown = true;
+    function startTyping(phrase) {
+      if (!subtitleTarget) return;
       clearTyping();
+      currentPhrase = phrase;
+      let i = 0;
+      const speed = 75;
+
+      function typeNext() {
+        if (i <= phrase.length) {
+          subtitleTarget.textContent = phrase.slice(0, i);
+          i++;
+          typingTimeout = setTimeout(typeNext, speed);
+        }
+      }
+      typeNext();
     }
 
-    // volvió arriba
-    if (y <= 40 && wasDown) {
-      wasDown = false;
-      const newPhrase = getRandomPhrase(currentPhrase);
-      startTyping(newPhrase);
-    }
-  });
-}
+    if (subtitleTarget) {
+      // primera vez
+      setTimeout(() => {
+        startTyping(getRandomPhrase());
+      }, 450);
 
-    // respeta reduce motion
+      // click en el título
+      if (titleEl) {
+        titleEl.addEventListener('click', () => {
+          const newPhrase = getRandomPhrase(currentPhrase);
+          startTyping(newPhrase);
+        });
+      }
+
+      // click en el subtítulo
+      subtitleTarget.parentElement.addEventListener('click', () => {
+        const newPhrase = getRandomPhrase(currentPhrase);
+        startTyping(newPhrase);
+      });
+
+      // scroll: borrar al bajar, reescribir al subir
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY || window.pageYOffset;
+
+        if (y > 120 && !wasDown) {
+          wasDown = true;
+          clearTyping();
+        }
+
+        if (y <= 40 && wasDown) {
+          wasDown = false;
+          const newPhrase = getRandomPhrase(currentPhrase);
+          startTyping(newPhrase);
+        }
+      });
+    }
+
+    /* ========== PRELOADER: esperar imágenes y soltar ========== */
+    (function handlePreloader() {
+      // todas las imágenes de la página
+      const imgPromises = Array.from(document.images).map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise(resolve => {
+          img.addEventListener('load', resolve, { once: true });
+          img.addEventListener('error', resolve, { once: true });
+        });
+      });
+
+      // timeout por si la red es lenta
+      const timeout = new Promise(resolve => setTimeout(resolve, 5000));
+
+      Promise.race([
+        Promise.all(imgPromises),
+        timeout
+      ]).then(() => {
+        document.body.classList.add('preloaded');
+
+        // forzar repintado para dispositivos que no muestran nada hasta que te mueves
+        setTimeout(() => {
+          window.dispatchEvent(new Event('resize'));
+          window.scrollTo(0, window.pageYOffset + 1);
+          window.scrollTo(0, window.pageYOffset - 1);
+          if (window.AOS) AOS.refresh();
+        }, 150);
+      });
+    })();
+
+    /* ========== respeta reduce motion ========== */
     try {
       const media = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (media.matches && window.ScrollTrigger) {
         ScrollTrigger.killAll();
       }
     } catch {}
-  });
-
-    // preloader: esperar assets antes de mostrar
-  window.addEventListener('load', function() {
-    // juntar todas las imágenes
-    const imgPromises = Array.from(document.images).map(img => {
-      if (img.complete) return Promise.resolve();
-      return new Promise(resolve => {
-        img.addEventListener('load', resolve, { once: true });
-        img.addEventListener('error', resolve, { once: true });
-      });
-    });
-
-    // video de fondo (si lo hay)
-    const bgVideo = document.getElementById('bgVideo');
-    const videoPromise = bgVideo
-      ? new Promise(resolve => {
-          if (bgVideo.readyState >= 2) {
-            resolve();
-          } else {
-            bgVideo.addEventListener('loadeddata', resolve, { once: true });
-            bgVideo.addEventListener('error', resolve, { once: true });
-          }
-        })
-      : Promise.resolve();
-
-    // timeout por si la conexión es lenta o la tele es del pleistoceno
-    const timeout = new Promise(resolve => setTimeout(resolve, 6000));
-
-    Promise.race([
-      Promise.all([...imgPromises, videoPromise]),
-      timeout
-    ]).then(() => {
-      // marcar que cargó
-      document.body.classList.add('preloaded');
-
-      // forzar repintado para esos dispositivos que no muestran nada hasta que te mueves
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-        window.scrollTo(0, window.pageYOffset + 1);
-        window.scrollTo(0, window.pageYOffset - 1);
-        if (window.AOS) {
-          AOS.refresh();
-        }
-      }, 200);
-    });
   });
 </script>
 
@@ -1120,7 +1050,5 @@ if (subtitleTarget) {
   </div>
   <button type="button" aria-label="Cerrar" onclick="document.getElementById('lastDropMsg').remove()">×</button>
 </div>
-
-
 </body>
 </html>
