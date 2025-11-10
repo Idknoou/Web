@@ -1,1022 +1,1026 @@
-<!doctype html>
-<html lang="es" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Idknoou — Sitio Oficial</title>
-  <meta name="description" content="Artista urbano latino desde Concepción, Chile.">
-  <link rel="icon" href="assets/img/favicon.png" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-
-  <!-- AOS (reveal suave) -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
-  <!-- GSAP + ScrollTrigger (entradas suaves) -->
-  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js" defer></script>
-  <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idknoou | Landing Especial</title>
+  <meta name="description" content="Sumérgete en el universo de Idknoou: estrenos, shows y comunidad en una sola experiencia." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/img/a.png" type="image/png" />
   <style>
-  :root{
-    --nav-h: 60px;
-    --muted: rgba(255,255,255,.56);
-    --accent: #27e1c1;
-    --fg: #fff;
-  }
-
-  body{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color:#fff;
-  background: radial-gradient(circle at top, rgba(0,0,0,.45), rgba(0,0,0,.9));
-  font-size: .9rem;              /* un pelín más chico */
-  overflow-x: hidden;
-}
-
-.container{
-  width: min(900px, 88%);         /* antes 1000 */
-  margin: 0 auto;
-}
-.container-wide{
-  width: min(1180px, 94%);        /* antes 1260 */
-  margin: 0 auto;
-}
-section{ padding: 58px 0; }       /* también un poquito menos de alto */
-
-
-  /* NAV */
-  header {
-    position:sticky;
-    top:0;
-    z-index:300;               /* más alto que los blurs */
-    background:#0b0b0bcc;
-    backdrop-filter: blur(8px);
-  }
-  nav {
-    height: calc(var(--nav-h) + env(safe-area-inset-top));
-    display:flex;
-    align-items:center;
-    gap:18px;
-    padding-top: env(safe-area-inset-top);
-  }
-  /* navbar un poco más grande */
-  nav a {
-    color:inherit;
-    text-decoration:none;
-    font-weight:600;
-    font-size:1.02rem;
-    letter-spacing:.01em;
-  }
-
-  /* HERO */
-  .hero { padding: 20px 0 10px; text-align:center }
-  .hero h1 {
-    font-size: clamp(38px, 8vw, 92px);
-    line-height:.95; margin:0;
-  }
-  .muted { color: var(--muted) }
-
-  /* ABOUT */
-  .about { padding-top: 24px }
-  .about-grid {
-    display:grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap:24px;
-    align-items:start;
-  }
-
-  .about-center {
-  text-align: center;
-  max-width: 620px;
-  margin: 0 auto;
-}
-
-.about-center p {
-  line-height: 1.55;
-  margin-top: 8px;
-}
-
-  .about-card {
-    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    padding:18px;
-  }
-  .about dl {
-    display:grid;
-    grid-template-columns: auto 1fr;
-    gap:10px 16px;
-    margin:0;
-  }
-  .about dt { color:var(--muted) }
-
-  /* Spotify */
-  .spotify-wrap {
-    padding-top: 5px;
-    display: flex;
-    justify-content: center;
-  }
-  .spotify-embed {
-    width: 600px;
-    max-width: 1000px;
-    height: 735px;
-    border-radius: 12px;
-  }
-
-  /* =========================
-     SHOWS
-     ========================= */
-  .shows .show-header h2 {
-    font-size: clamp(28px, 6.2vw, 64px);
-    margin: 0 0 6px;
-    line-height: 1.02;
-  }
-  .shows .show-header .subtitle {
-    color: var(--muted);
-    margin: 0 auto;
-     font-size: 17px;
-    max-width: 820px;
-  }
-  
-
-  .show-group{
-  margin-bottom: 46px;
-  padding-top: 10px;     /* ya no necesita espacio para el sticky */
-}
-
-.show-header{
-  text-align:center;
-  margin-bottom: 14px;
-}
-
-.show-header h2{
-  font-size: clamp(26px, 5.6vw, 50px);
-  margin:0 0 4px;
-  line-height:1.02;
-}
-.show-header .subtitle{
-  color: var(--muted);
-  margin:0;
-}
-
-/* IMPORTANTE: anulamos cualquier cosa que tenga la clase pin,
-   por si la dejaste en el HTML */
-.show-header.pin{
-  position: static;
-  overflow: visible;              /* antes estaba en hidden */
-  top: auto;      
-  pointer-events:auto;
-}
-.show-header.pin::before{
-  content:none;
-}
-
-
-  .show-actions{
-    display:flex;
-    gap:12px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin: 8px 0 12px;
-  }
-
-  .show-feature{
-    display:grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: clamp(18px, 2.6vw, 36px);
-    align-items:center;
-    margin: 22px 0 36px;
-  }
-  .show-feature.right{ grid-template-columns: 1fr 1.2fr }
-
-  .show-feature .photo{
-    position: relative;
-    display:block;
-    border-radius:18px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.09);
-    box-shadow:0 18px 50px rgba(0,0,0,.35);
-    aspect-ratio: 4/3;
-    background: rgba(255,255,255,.03);
-  }
-  .show-feature .photo img{
-    width:100%; height:100%; object-fit:cover; display:block;
-  }
-
-  .year-badge{
-    position:absolute;
-    top:14px; left:14px;
-    background: rgba(0,0,0,.65);
-    border:1px solid rgba(255,255,255,.3);
-    padding:2px 10px 3px;
-    border-radius:9999px;
-    font-size:14px;
-    font-weight:700;
-    letter-spacing:.02em;
-  }
-
-  .show-feature .info h3{ margin:0 0 8px; font-size:clamp(20px, 3vw, 28px) }
-  .show-feature .info p{ line-height:1.55; }
-
-  .show-strip{
-    overflow-x:auto;
-    white-space:nowrap;
-    padding:8px 0 2px;
-    scrollbar-width: thin;
-  }
-  .show-strip .tile{
-    display:inline-block;
-    width:clamp(220px, 26vw, 360px);
-    aspect-ratio:4/3;
-    margin-right:12px;
-    border-radius:14px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.09);
-    background: rgba(255,255,255,.03);
-  }
-  .show-strip .tile img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-  /* Botones base */
-  .btn{
-    display:inline-block;
-    padding:10px 16px;
-    border-radius:14px;
-    background:var(--accent);
-    color:#0b0b0b;
-    font-weight:700;
-    transition:transform .2s, box-shadow .2s
-  }
-  .btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(39,225,193,.25) }
-  .btn.ghost{ background:transparent; color:var(--fg); border:1px solid rgba(255,255,255,.18) }
-
-  /* Contacto */
-  .contact-inline{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-  .contact-inline .tel{
-    font-weight:700;
-    text-decoration:none;
-    color:#fff;
-  }
-  .contact-actions{
-    display:none;
-    gap:10px;
-    margin-top:6px;
-  }
-  @media (hover:none), (pointer:coarse){
-    .contact-actions{ display:flex; flex-wrap:wrap; }
-  }
-
-  /* VIDEO DE FONDO */
-  .bg-video{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-    opacity:0.7;
-    pointer-events: none;
-  }
-
-  /* Mensaje flotante */
-  .floating-msg{
-    position: fixed;
-    bottom: 18px;
-    left: 18px;
-    background: rgba(0,0,0,.78);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 14px;
-    padding: 10px 14px 10px 12px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    backdrop-filter: blur(8px);
-    z-index: 999;
-    max-width: 260px;
-    font-size: .82rem;
-    line-height: 1.3;
-    box-shadow: 0 12px 30px rgba(0,0,0,.35);
-    animation: fadeIn .28s ease-out;
-  }
-  .floating-msg strong{
-    display:block;
-    font-size: .75rem;
-    letter-spacing:.04em;
-    text-transform: uppercase;
-    color: #27e1c1;
-  }
-  .floating-msg button{
-    background: transparent;
-    border: none;
-    color: rgba(255,255,255,.5);
-    cursor: pointer;
-    font-size: 1rem;
-    line-height: 1;
-  }
-  .floating-msg a{
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: .75rem;
-  }
-  .floating-msg a:hover{ text-decoration: underline; }
-  @keyframes fadeIn{
-    from{ opacity:0; transform: translateY(12px); }
-    to{ opacity:1; transform: translateY(0); }
-  }
-
-  /* =======================
-     RESPONSIVE
-     ======================= */
-  @media (max-width: 980px){
-    .about-grid{ grid-template-columns: 1fr; }
-    .show-feature, .show-feature.right{ grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 640px){
-    /* las tarjetas ya no se salen */
-    .about-card{
-      padding:14px 14px 16px;
-    }
-    .about dl{
-      grid-template-columns: 1fr;   /* una sola columna */
-      gap:5px 0;
-    }
-    .about dt{
-      font-size:.82rem;
-    }
-    .about dd{
-      margin-bottom:4px;
+    :root {
+      color-scheme: dark;
+      --bg: #050607;
+      --bg-soft: #0c1015;
+      --bg-alt: #08090c;
+      --fg: #f6f7f8;
+      --muted: rgba(246, 247, 248, 0.64);
+      --accent: #27e1c1;
+      --accent-soft: rgba(39, 225, 193, 0.16);
+      --blur: blur(18px);
+      font-size: 16px;
     }
 
-    .container,
-    .container-wide{
-      width: 92%;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .spotify-embed{
-      height: 420px;
-      max-width:100%;
+    body {
+      font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, rgba(39, 225, 193, 0.08), transparent 65%), var(--bg);
+      color: var(--fg);
+      overflow-x: hidden;
     }
 
-    .show-group { padding-top: calc(var(--nav-h) + 16px) }
-
-    .show-header.pin{
-      overflow: visible;
-      top: calc(var(--nav-h) + 6px);
-    }
-    .show-header.pin::before{
-      left:0;
-      width:100%;
+    a {
+      color: inherit;
     }
 
-    .show-feature{
-      overflow:hidden;  /* si gsap se va 2px al lado, lo corta */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      backdrop-filter: var(--blur);
+      background: linear-gradient(90deg, rgba(8, 12, 16, 0.88), rgba(8, 12, 16, 0.68));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .floating-msg{
-      left: 12px;
-      right: 12px;
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 0 18px rgba(39, 225, 193, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--fg);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 96px 24px;
+    }
+
+    .section-sm {
+      padding: 72px 24px;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+      padding-bottom: 128px;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 24px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.4) brightness(0.48);
+      z-index: -2;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(5, 6, 7, 0.15) 0%, rgba(5, 6, 7, 0.95) 75%, var(--bg) 100%);
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      animation: float-up 1s ease forwards;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(39, 225, 193, 0.08);
+      border: 1px solid rgba(39, 225, 193, 0.28);
+      padding: 10px 18px;
+      border-radius: 999px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #020403;
+      box-shadow: 0 14px 30px rgba(39, 225, 193, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(39, 225, 193, 0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--fg);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .pulse {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: #020403;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pulse::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 2px solid rgba(39, 225, 193, 0.45);
+      transform: scale(1);
+      opacity: 0.65;
+      animation: pulse 2.8s infinite;
+    }
+
+    .about-grid {
+      display: grid;
+      gap: 32px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 28px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(39, 225, 193, 0.18), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .card h2 {
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      line-height: 1.1;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 22px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .release {
+      display: grid;
+      grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .release-cover {
+      position: relative;
+      aspect-ratio: 1/1;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+    }
+
+    .release-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .release-info h3 {
+      font-size: clamp(1.9rem, 3.6vw, 3rem);
+      line-height: 1.08;
+      margin-bottom: 12px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .streaming {
+      margin-top: 32px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .streaming a {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      border-radius: 16px;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .streaming a span {
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .streaming a:hover {
+      transform: translateX(6px);
+      border-color: rgba(39, 225, 193, 0.38);
+    }
+
+    .shows-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .show-card {
+      padding: 28px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .show-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(39, 225, 193, 0.18), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .show-card:hover::before {
+      opacity: 1;
+    }
+
+    .show-card strong {
+      font-size: 1.4rem;
+    }
+
+    .show-card time {
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .show-card p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .gallery {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .gallery figure {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      grid-column: span 4;
+      aspect-ratio: 3 / 4;
+    }
+
+    .gallery figure:nth-child(2),
+    .gallery figure:nth-child(5) {
+      grid-column: span 5;
+      aspect-ratio: 4 / 5;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery figure:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery figcaption {
+      position: absolute;
       bottom: 12px;
-      max-width: none;
+      left: 14px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(5, 6, 7, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
-  }
 
-  main, footer { position: relative; z-index: 2; }
+    .community {
+      background: radial-gradient(circle at top left, rgba(39, 225, 193, 0.2), transparent 60%), var(--bg-alt);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 32px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 42px;
+      align-items: center;
+    }
 
-  
+    .community h3 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
 
-.glow-strong {
-  color: #fff;
-  text-shadow:
-    0 0 8px rgba(255, 255, 255, 0.9),
-    0 0 20px rgba(255, 255, 255, 0.55),
-    0 0 40px rgba(255, 255, 255, 0.3);
-}
+    .community p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
 
-.tgcr {
-  background: linear-gradient(90deg, #ff0000, #ff6a6a, #ff0000); /* Rojo intenso a rojo claro y de vuelta */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  display: inline-block;
-}
-@keyframes glowPulse {
-  0% {
-    text-shadow:
-      0 0 8px rgba(255, 255, 255, 0.9),
-      0 0 20px rgba(255, 255, 255, 0.55),
-      0 0 40px rgba(255, 255, 255, 0.3);
-    opacity: 1;
-  }
-  50% {
-    text-shadow:
-      0 0 2px rgba(255, 255, 255, 0.5),
-      0 0 6px rgba(255, 255, 255, 0.3);
-    opacity: .78;
-  }
-  100% {
-    text-shadow:
-      0 0 8px rgba(255, 255, 255, 0.9),
-      0 0 20px rgba(255, 255, 255, 0.55),
-      0 0 40px rgba(255, 255, 255, 0.3);
-    opacity: 1;
-  }
-}
+    .community-stats {
+      display: grid;
+      gap: 16px;
+    }
 
-/* clase para combinar con glow-strong */
-.glow-loop {
-  animation: glowPulse 2.4s ease-in-out infinite;
-}
-.typing {
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-}
+    .community-stats li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+    }
 
-.typing::after {
-  content: "";
-  position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 6px;
-  height: 1.1em;
-  background: rgba(255,255,255,.8);
-  border-radius: 2px;
-  animation: cursorBlink .7s step-end infinite;
-}
+    .community-stats li::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 8px rgba(39, 225, 193, 0.12);
+    }
 
-@keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-.mutedtyping {
-  font-size: 20px; /* súbelo más si quieres */
-  
-}
+    footer {
+      padding: 72px 24px 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      background: rgba(5, 6, 7, 0.92);
+    }
 
-/* PRELOADER */
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(circle at top, #060606, #000);
-  z-index: 9999;
-}
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      align-items: start;
+    }
 
-.preloader-inner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
+    .footer-inner p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
 
-.spinner {
-  width: 46px;
-  height: 46px;
-  border: 3px solid rgba(255,255,255,.12);
-  border-top-color: #27e1c1;
-  border-radius: 999px;
-  margin: 0 auto 14px;
-  animation: spin 0.8s linear infinite;
-}
+    .footer-links {
+      display: grid;
+      gap: 12px;
+    }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+    .footer-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
 
-.pre-text {
-  color: rgba(255,255,255,.6);
-  font-size: .8rem;
-}
+    .footer-links a:hover {
+      color: var(--fg);
+    }
 
-body.preloaded #preloader {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .25s ease-out;
-}
-</style>
+    .footer-bottom {
+      margin-top: 36px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
 
+    .floating-bubble {
+      position: fixed;
+      right: 32px;
+      bottom: 32px;
+      background: rgba(5, 6, 7, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      padding: 18px 22px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      transform: translateY(120%);
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      z-index: 950;
+    }
+
+    .floating-bubble.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .floating-bubble strong {
+      display: block;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      color: var(--fg);
+    }
+
+    .floating-bubble span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .floating-bubble button {
+      all: unset;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 1.2rem;
+      line-height: 1;
+      padding: 6px;
+      border-radius: 50%;
+      transition: color 0.2s ease;
+    }
+
+    .floating-bubble button:hover {
+      color: var(--accent);
+    }
+
+    .section-title {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 38px;
+    }
+
+    .section-title span {
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section-title h2 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+    }
+
+    @keyframes float-up {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 120px 24px 140px;
+      }
+
+      .hero-inner {
+        padding: 0;
+      }
+
+      .section {
+        padding: 84px 20px;
+      }
+
+      .about-grid,
+      .release,
+      .community {
+        grid-template-columns: 1fr;
+      }
+
+      .community {
+        padding: 36px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      .gallery figure,
+      .gallery figure:nth-child(2),
+      .gallery figure:nth-child(5) {
+        grid-column: span 3;
+        aspect-ratio: 3 / 4;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        font-size: 15px;
+      }
+
+      header {
+        background: rgba(8, 12, 16, 0.92);
+      }
+
+      .hero {
+        padding: 100px 18px 120px;
+      }
+
+      .hero-inner {
+        padding: 0;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .pulse {
+        display: none;
+      }
+
+      .card {
+        padding: 28px 24px;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .community {
+        padding: 28px;
+      }
+
+      .floating-bubble {
+        right: 16px;
+        bottom: 16px;
+        width: calc(100% - 32px);
+      }
+    }
+  </style>
 </head>
-<body id="top">
-
-  <div id="preloader">
-    <div class="preloader-inner">
-      
-      <h1 class="logo-pre glowPulse glow-loop">Idknoou</h1>
-      <div class="spinner"></div>
-      <p class="pre-text">Espere mientras carga la página...</p>
-      
-    </div>
-  </div>
-
-  <!-- VIDEO DE FONDO -->
-  <video id="bgVideo" class="bg-video" autoplay muted loop playsinline>
-    <source src="assets/video/bg-show1.mp4" type="video/mp4">
-  </video>
-
+<body>
   <header>
-    <nav class="container">
-      <a href="#top">Inicio</a>
-      <a href="#shows">Shows</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+    <div class="nav">
+      <a class="brand" href="#hero">
+        <img src="assets/img/a3.png" alt="Logo Idknoou">
+        Idknoou Atmosfera
+      </a>
+      <nav class="nav-links">
+        <a href="#about">Universo</a>
+        <a href="#release">Lanzamiento</a>
+        <a href="#shows">Shows</a>
+        <a href="#community">Comunidad</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero container-wide">
-      <div data-aos="fade-up">
-        <h1 id="hero-title" class="glowPulse glow-loop">Idknoou</h1>
-        <p class="mutedtyping muted typing" data-aos="fade-up" data-aos-delay="100">
-  <span id="hero-subtitle"></span>
-</p>
+    <section class="section hero" id="hero">
+      <video src="assets/video/bg-show2.mp4" autoplay muted loop playsinline></video>
+      <div class="hero-inner">
+        <div class="hero-content" data-reveal>
+          <span class="hero-badge">Nuevo ciclo 2024</span>
+          <h1>Un landing especial para la experiencia Idknoou</h1>
+          <p>Voces, beats y atmósferas que se sienten de madrugada. Conecta con la nueva era, escucha los estrenos y asegura tu entrada a los próximos shows.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="https://open.spotify.com/artist/65m6UOB4ekojjqf7FOYqPo" target="_blank" rel="noopener">Escuchar ahora</a>
+            <a class="btn btn-secondary" href="#shows">Ver fechas en vivo</a>
+            <div class="pulse">24</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Spotify -->
-    <div class="container-wide spotify-wrap" aria-label="Escucha a Idknoou" data-aos="fade-up">
-      <iframe class="spotify-embed"
-        src="https://open.spotify.com/embed/artist/65m6UOB4ekojjqf7FOYqPo?utm_source=generator&theme=0"
-        width="100%" frameborder="0" allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-      </iframe>
-    </div>
+    <section class="section" id="about">
+      <div class="about-grid">
+        <article class="card" data-reveal>
+          <h2>Un sonido nocturno con brillo propio</h2>
+          <p>Idknoou crea paisajes urbanos que mezclan trap, R&B y pop alternativo. Cada track es un viaje cinematográfico entre luces de neón, historias íntimas y energía de club.</p>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>12M+</strong>
+              <span>Streams acumulados en plataformas digitales.</span>
+            </div>
+            <div class="stat">
+              <strong>45K</strong>
+              <span>Personas en comunidad entre redes y newsletter.</span>
+            </div>
+            <div class="stat">
+              <strong>8</strong>
+              <span>Ciudades recorriendo Latin America durante 2023.</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-reveal>
+          <h2>El ritual en vivo</h2>
+          <p>Visuales inmersivas, banda completa y un set que combina clásicos con material inédito. Viví la experiencia completa, antes y después del show.</p>
+          <ul class="community-stats">
+            <li>Experiencia Meet &amp; Greet extendida.</li>
+            <li>Merch coleccionable con tirada limitada.</li>
+            <li>After con DJ set exclusivo para fans registrados.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-    <!-- ABOUT -->
-    <section id="bio" class="about">
-  <div class="container about-center">
-    <h2 class="glow-strong">Acerca de Idknoou</h2>
-    <p class="">
-      Víctor Ignacio Monsalve Riquelme, más conocido como IDKNOOU, es un artista urbano chileno nacido en Concepción.
-      Cantante, productor y beatmaker. A sus 22 años proyecta una línea urbana latina con enfoque en shows en vivo
-      y puesta visual.
-    </p>
-  </div>
-</section>
-
-<!-- SHOWS -->
-<section id="shows" class="shows">
-  <div class="container-wide">
-
-    <!-- 1) Fiestas Patrias -->
-    <div class="show-group" id="show-fiestas-patrias">
-      <div class="show-header pin" data-aos="fade-up">
-        <div class="header-inner">
-          <h2 class="glow-strong">Fiestas Patrias</h2>
-          <p class="subtitle">Hualpén</p>
+    <section class="section" id="release">
+      <div class="section-title" data-reveal>
+        <span>Nuevo lanzamiento</span>
+        <h2>"Señoritas" ya está sonando en todas las plataformas</h2>
+      </div>
+      <div class="release" data-reveal>
+        <div class="release-cover">
+          <img src="assets/img/Macha 4.jpg" alt="Portada nuevo lanzamiento de Idknoou">
+        </div>
+        <div class="release-info">
+          <div class="chip-row">
+            <span class="chip">Late night vibes</span>
+            <span class="chip">Prod. IdkOnTheBeats</span>
+            <span class="chip">Edición limitada</span>
+          </div>
+          <p style="margin: 24px 0; color: var(--muted); line-height: 1.7;">Una carta abierta a esas madrugadas interminables. "Señoritas" captura el pulso de la ciudad, los suspiros, el deseo y el ritmo perfecto para quedarte hasta que salga el sol.</p>
+          <div class="streaming">
+            <a href="https://open.spotify.com/artist/65m6UOB4ekojjqf7FOYqPo" target="_blank" rel="noopener">
+              <span>→ Escuchar en Spotify</span>
+            </a>
+            <a href="https://music.apple.com" target="_blank" rel="noopener">
+              <span>→ Play en Apple Music</span>
+            </a>
+            <a href="https://www.youtube.com" target="_blank" rel="noopener">
+              <span>→ Visualizer en YouTube</span>
+            </a>
+          </div>
         </div>
       </div>
+    </section>
 
-      <article class="show-feature left" data-aos="fade-up">
-        <a class="photo" href="assets/img/m3.jpg" target="_blank" rel="noopener">
-          <span class="year-badge">2025</span>
-          <img src="assets/img/comprimidas/comp-m3.jpg" alt="Fiestas Patrias — escena" loading="lazy">
-        </a>
-        <div class="info">
-          <h3>Show masivo en Hualpén</h3>
-          <p>
-            Presentación en el marco de las Fiestas Patrias, dentro de un evento abierto y familiar que reunió a más de <span class="glow-strong">30.000</span> asistentes.
-          </p>
-          <p>
-            Apertura urbana del show de Agrupación Marilyn, con repertorio propio y adaptaciones de covers. Durante el show se lanzó merchandising y dulces Fini al público, generando una interacción cercana con las familias.
-          </p>
-        </div>
-      </article>
-
-      <article class="show-feature right" data-aos="fade-up">
-        <a class="photo" href="assets/img/m1.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-m1.jpg" alt="Fiestas Patrias — crowd" loading="lazy">
-        </a>
-        <div class="info">
-          <h3 class="glow-strong">Recepción</h3>
-          <p>Segmento bailable y dinámico que preparó al público para el acto principal. El show se desarrolló en formato reducido con pistas originales, manteniendo energía constante durante toda la presentación.</p>
-        </div>
-      </article>
-
-      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Fiestas Patrias">
-        <a class="tile" href="assets/img/m2.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-m2.jpg" alt="Detalle 1" loading="lazy">
-        </a>
-        <a class="tile" href="assets/img/m.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-m.jpg" alt="Detalle 2" loading="lazy">
-        </a>
-        <a class="tile" href="assets/img/m4.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-m4.jpg" alt="Detalle 3" loading="lazy">
-        </a>
+    <section class="section section-sm" id="shows">
+      <div class="section-title" data-reveal>
+        <span>Tour 2024</span>
+        <h2>Próximas fechas</h2>
       </div>
-    </div>
-
-    <!-- 2) Festival Graneros de Chile -->
-    <div class="show-group" id="show-graneros">
-      <div class="show-header pin" data-aos="fade-up">
-        <div class="header-inner">
-          <h2 class="glow-strong">Festival Graneros de Chile</h2>
-          <p class="subtitle">Traiguén</p>
-        </div>
+      <div class="shows-grid">
+        <article class="show-card" data-reveal>
+          <time datetime="2024-06-28">28 JUN • Buenos Aires</time>
+          <strong>Teatro Vórtice</strong>
+          <p>Show completo con invitados sorpresa y live session audiovisual.</p>
+          <a class="btn btn-secondary" href="https://www.passline.com" target="_blank" rel="noopener">Tickets</a>
+        </article>
+        <article class="show-card" data-reveal>
+          <time datetime="2024-07-12">12 JUL • Córdoba</time>
+          <strong>Club Metrónomo</strong>
+          <p>Formato íntimo, cupos limitados y merch especial para las primeras filas.</p>
+          <a class="btn btn-secondary" href="https://www.passline.com" target="_blank" rel="noopener">Tickets</a>
+        </article>
+        <article class="show-card" data-reveal>
+          <time datetime="2024-08-02">02 AGO • Montevideo</time>
+          <strong>Hall Prisma</strong>
+          <p>Experiencia inmersiva 360°, visuales a cargo de artistas locales.</p>
+          <a class="btn btn-secondary" href="https://www.passline.com" target="_blank" rel="noopener">Tickets</a>
+        </article>
+        <article class="show-card" data-reveal>
+          <time datetime="2024-08-24">24 AGO • Santiago</time>
+          <strong>House Aurora</strong>
+          <p>Última fecha del tramo de invierno con after oficial del crew.</p>
+          <a class="btn btn-secondary" href="https://www.passline.com" target="_blank" rel="noopener">Tickets</a>
+        </article>
       </div>
+    </section>
 
-      <div class="show-actions" data-aos="fade-up">
-        <a class="btn" href="https://youtu.be/Dwiox4WpqZs?t=7066" target="_blank" rel="noopener">Ver Transmisión</a>
+    <section class="section" id="gallery">
+      <div class="section-title" data-reveal>
+        <span>Memorias visuales</span>
+        <h2>Instantes capturados entre flashes y neón</h2>
       </div>
-
-      <article class="show-feature right" data-aos="fade-up">
-        <a class="photo" href="assets/img/g.jpg" target="_blank" rel="noopener">
-          <span class="year-badge">2025</span>
-          <img src="assets/img/comprimidas/comp-g.jpg" alt="Graneros — main" loading="lazy">
-        </a>
-        <div class="info">
-          <h3 class="glow-strong">Presentación festivalera</h3>
-          <p>Set urbano dentro del festival regional, transmitido en vivo por streaming y ante un público superior a <span class="glow-strong">14.000</span>.</p>
-          <p>La transmisión alcanzó más de <span class="glow-strong">160.000</span> visualizaciones en YouTube, consolidando presencia en plataformas digitales.</p>
-          <p>Repertorio centrado en energía y participación del público.</p>
-        </div>
-      </article>
-
-      <article class="show-feature left" data-aos="fade-up">
-        <a class="photo" href="assets/img/g1.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-g1.jpg" alt="Graneros — crowd" loading="lazy">
-        </a>
-        <div class="info">
-          <h3 class="glow-strong">Highlights</h3>
-          <p>Los temas más rítmicos marcaron buena respuesta del público y conexión con la animación del evento. Se fortaleció la imagen de artista urbano chileno con proyección nacional.</p>
-        </div>
-      </article>
-
-      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Graneros">
-        <a class="tile" href="assets/img/g2.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-g2.jpg" alt="Detalle 1" loading="lazy">
-        </a>
-        <a class="tile" href="assets/img/g3.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-g3.jpg" alt="Detalle 2" loading="lazy">
-        </a>
+      <div class="gallery">
+        <figure data-reveal>
+          <img src="assets/img/Macha 1.jpg" alt="Idknoou en vivo">
+          <figcaption>Live session</figcaption>
+        </figure>
+        <figure data-reveal>
+          <img src="assets/img/g2.jpg" alt="Fans en show">
+          <figcaption>El club</figcaption>
+        </figure>
+        <figure data-reveal>
+          <img src="assets/img/Macha 5.jpg" alt="Detrás de escena">
+          <figcaption>Backstage</figcaption>
+        </figure>
+        <figure data-reveal>
+          <img src="assets/img/Segundo piso 2.jpg" alt="Iluminación de concierto">
+          <figcaption>Luces</figcaption>
+        </figure>
+        <figure data-reveal>
+          <img src="assets/img/g3.jpg" alt="Producción musical">
+          <figcaption>Estudio</figcaption>
+        </figure>
       </div>
-    </div>
+    </section>
 
-    <!-- 3) Fiesta de la Macha -->
-    <div class="show-group" id="show-macha">
-      <div class="show-header pin" data-aos="fade-up">
-        <div class="header-inner">
-          <h2 class="glow-strong">Fiesta de la Macha</h2>
-          <p class="subtitle">Hualpén, Caleta Lenga</p>
+    <section class="section" id="community">
+      <div class="community" data-reveal>
+        <div>
+          <h3>Sumate a la comunidad especial</h3>
+          <p>Recibí adelantos exclusivos, entradas anticipadas y acceso a drops limitados de merch. Esta lista es el corazón de la tribu Idknoou.</p>
+          <form id="newsletter" class="hero-cta" action="https://formspree.io/f/xnqkoqgy" method="POST">
+            <input type="email" name="email" required placeholder="tu@email.com" style="flex:1; min-width: 220px; padding: 14px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: rgba(8,12,16,0.6); color: var(--fg); font-family: inherit;">
+            <button class="btn btn-primary" type="submit">Unirme ahora</button>
+          </form>
+        </div>
+        <div>
+          <ul class="community-stats">
+            <li>Escuchá demos inéditas antes que nadie.</li>
+            <li>Elegí la próxima ciudad del tour con tu voto.</li>
+            <li>Accedé a rooms privados en Discord y eventos digitales.</li>
+            <li>Recibí visuales para tu fondo en exclusiva.</li>
+          </ul>
         </div>
       </div>
-
-      <div class="show-actions" data-aos="fade-up">
-        <a class="btn" href="https://www.youtube.com/watch?v=pV9abyfATls" target="_blank" rel="noopener">Video recopilación</a>
-      </div>
-
-      <article class="show-feature right" data-aos="fade-up">
-        <a class="photo" href="assets/img/Macha 1.jpg" target="_blank" rel="noopener">
-          <span class="year-badge">2025</span>
-          <img src="assets/img/comprimidas/comp-Macha 1.jpg" alt="Macha — main" loading="lazy">
-        </a>
-        <div class="info">
-          <h3 class="glow-strong">Club lleno previo al acto principal</h3>
-          <p>Show de apertura previo a <span class="glow-strong">Zúmbale Primo</span>, con más de <span class="glow-strong">10.000</span> asistentes en formato de fiesta popular al aire libre.</p>
-          <p>Set corto e intenso, con fuerte conexión con el público y coros participativos. Durante la presentación se lanzaron dulces Fini como parte de la dinámica escénica.</p>
-        </div>
-      </article>
-
-      <article class="show-feature left" data-aos="fade-up">
-        <a class="photo" href="assets/img/Macha 2.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-Macha 2.jpg" alt="Macha — crowd" loading="lazy">
-        </a>
-        <div class="info">
-          <h3 class="glow-strong">Conexión con la gente</h3>
-          <p>El repertorio propio se integró con éxito en un contexto tropical, validando versatilidad escénica y cercanía. Material grabado y utilizado para contenido audiovisual del artista.</p>
-        </div>
-      </article>
-
-      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Macha">
-        <a class="tile" href="assets/img/Macha 3.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-Macha 3.jpg" alt="Detalle 1" loading="lazy">
-        </a>
-        <a class="tile" href="assets/img/Macha 4.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-Macha 4.jpg" alt="Detalle 2" loading="lazy">
-        </a>
-        <a class="tile" href="assets/img/Macha 5.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-Macha 5.jpg" alt="Detalle 3" loading="lazy">
-        </a>
-      </div>
-    </div>
-
-    <!-- 4) Aniversario Educa -->
-    <div class="show-group" id="show-educa">
-      <div class="show-header pin" data-aos="fade-up">
-        <div class="header-inner">
-          <h2 class="glow-strong">Aniversario Educa</h2>
-          <p class="subtitle">Concepción, Universidad Católica</p>
-        </div>
-      </div>
-
-      <article class="show-feature left" data-aos="fade-up">
-        <a class="photo" href="assets/img/a.png" target="_blank" rel="noopener">
-          <span class="year-badge">2025</span>
-          <img src="assets/img/comprimidas/comp-a.png" alt="Educa — escenario" loading="lazy">
-        </a>
-        <div class="info">
-          <h3 class="glow-strong">Show universitario</h3>
-          <p>Presentación en el aniversario institucional con público principalmente estudiantil. Set urbano con fusión pop, mostrando temas inéditos y propuesta de artista emergente local con proyección.</p>
-          <p>Se mantuvo la interacción con el público lanzando dulces Fini, parte del sello distintivo del proyecto en vivo.</p>
-        </div>
-      </article>
-
-      <article class="show-feature right" data-aos="fade-up">
-        <a class="photo" href="assets/img/a4.png" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-a4.png" alt="Educa — crowd" loading="lazy">
-        </a>
-        <div class="info">
-          <h3 class="glow-strong">Material para dossier</h3>
-          <p>Instancia ideal para capturar fotos de escenario, público y planos de interacción. Evento registrado para material promocional y dossier de prensa.</p>
-        </div>
-      </article>
-
-      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Educa">
-        <a class="tile" href="assets/img/a3.png" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-a3.png" alt="Detalle 1" loading="lazy">
-        </a>
-        <a class="tile" href="assets/img/a5.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-a5.jpg" alt="Detalle 2" loading="lazy">
-        </a>
-        <a class="tile" href="assets/img/a2.png" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-a2.png" alt="Detalle 3" loading="lazy">
-        </a>
-      </div>
-    </div>
-
-    <!-- 5) Segundo Piso -->
-    <div class="show-group" id="show-segundo-piso">
-      <div class="show-header pin" data-aos="fade-up">
-        <div class="header-inner">
-          <h2 class="glow-strong">Show Segundo Piso</h2>
-          <p class="subtitle">Concepción</p>
-        </div>
-      </div>
-
-      <div class="show-actions" data-aos="fade-up">
-        <a class="btn ghost" href="https://youtu.be/UgleOeE8kU0?si=c_No1h10Xe9JETeQ" target="_blank" rel="noopener">Transmisión completa</a>
-      </div>
-
-      <article class="show-feature right" data-aos="fade-up">
-        <a class="photo" href="assets/img/Segundo Piso.jpg" target="_blank" rel="noopener">
-          <span class="year-badge">2025</span>
-          <img src="assets/img/comprimidas/comp-Segundo Piso.jpg" alt="Segundo Piso — main" loading="lazy">
-        </a>
-        <div class="info">
-          <h3 class="glow-strong">Inicio de la carrera en vivo</h3>
-          <p>Primera instancia en vivo del proyecto Idknoou. Show en formato íntimo, pensado para probar repertorio, energía escénica y respuesta del público.</p>
-          <p>Fue la primera vez que se lanzaron dulces Fini al público, marcando el inicio de una tradición dentro de las presentaciones del proyecto.</p>
-          <p>Se generó contenido audiovisual para redes y material de promoción artística.</p>
-        </div>
-      </article>
-
-      <article class="show-feature left" data-aos="fade-up">
-        <a class="photo" href="assets/img/Segundo Piso 1.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-Segundo Piso 1.jpg" alt="Segundo Piso — crowd" loading="lazy">
-        </a>
-        <div class="info">
-          <h3 class="glow-strong">Construcción de comunidad</h3>
-          <p>Asistencia de entorno cercano y público nuevo. Instancia clave para dar inicio al desarrollo de una comunidad artística alrededor del proyecto.</p>
-        </div>
-      </article>
-
-      <div class="show-strip" data-aos="fade-up" aria-label="Detalles — Segundo Piso">
-        <a class="tile" href="assets/img/Segundo piso 2.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-Segundo piso 2.jpg" alt="Detalle 1" loading="lazy">
-        </a>
-        <a class="tile" href="assets/img/Segundo piso 3.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-Segundo piso 3.jpg" alt="Detalle 2" loading="lazy">
-        </a>
-        <a class="tile" href="assets/img/IMG_2588.jpg" target="_blank" rel="noopener">
-          <img src="assets/img/comprimidas/comp-IMG_2588.jpg" alt="Detalle 3" loading="lazy">
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-    <!-- CONTACTO -->
-    <section id="contacto" class="container">
-      <h2 data-aos="zoom-in">Contacto</h2>
-      <p class="muted" data-aos="fade-up">
-        Correo: <a href="mailto:lapromesaidk.contacto@gmail.com">lapromesaidk.contacto@gmail.com</a>
-      </p>
-
-      <dd class="contact-inline">
-        <dt class="muted" data-aos="fade-up">Contacto (Manager):</dt>
-        <a class="tel" href="tel:+56966486158">+56 9 6648 6158</a>
-
-        <div class="contact-actions">
-          <a class="btn" href="tel:+56966486158" aria-label="Llamar por teléfono">Llamar</a>
-          <a class="btn ghost"
-            href="https://wa.me/56966486158?text=Hola%20Idknoou,%20vengo%20desde%20tu%20web.%20Quiero%20hablar%20de%20shows%20%F0%9F%8E%A4"
-            target="_blank" rel="noopener" aria-label="Hablar por WhatsApp">WhatsApp</a>
-          <a class="btn ghost" href="assets/contact/idknoou.vcf" download="Idknoou.vcf">Guardar contacto</a>
-        </div>
-      </dd>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <small>© <span id="year"></span> Idknoou</small>
+  <footer id="contacto">
+    <div class="footer-inner">
+      <div>
+        <a class="brand" href="#hero" style="margin-bottom: 18px; display: inline-flex;">
+          <img src="assets/img/a4.png" alt="Logo Idknoou">
+          Idknoou
+        </a>
+        <p>Management &amp; Bookings: <a href="mailto:hola@idknoou.com">hola@idknoou.com</a></p>
+        <p>Prensa: <a href="mailto:press@idknoou.com">press@idknoou.com</a></p>
+      </div>
+      <div>
+        <h4 style="font-size: 0.92rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 16px;">Social</h4>
+        <div class="footer-links">
+          <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.youtube.com" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://open.spotify.com/artist/65m6UOB4ekojjqf7FOYqPo" target="_blank" rel="noopener">Spotify</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size: 0.92rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 16px;">Recursos</h4>
+        <div class="footer-links">
+          <a href="#release">Discografía</a>
+          <a href="#shows">Agenda</a>
+          <a href="#community">Newsletter</a>
+          <a href="#gallery">Galería</a>
+        </div>
+      </div>
     </div>
+    <div class="footer-bottom">© 2024 Idknoou. Landing especial diseñada para vibear.</div>
   </footer>
 
-<script>
-  // mensaje flotante después de un rato
-  setTimeout(() => {
-    const el = document.getElementById('lastDropMsg');
-    if (el) el.style.display = 'flex';
-  }, 3566);
-
-  // año dinámico
-  const y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
-
-  // scroll suave
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      if (!id || id === '#') return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
-  // video de fondo aleatorio
-  const bgVideos = [
-    'assets/video/bg-show1.mp4',
-    'assets/video/bg-show2.mp4'
-  ];
-  const bgVideoEl = document.getElementById('bgVideo');
-  if (bgVideoEl) {
-    const randomVideo = bgVideos[Math.floor(Math.random() * bgVideos.length)];
-    bgVideoEl.src = randomVideo;
-    bgVideoEl.addEventListener('error', () => {
-      bgVideoEl.style.display = 'none';
-    });
-  }
-
-  // cuando todo cargue
-  window.addEventListener('load', () => {
-    /* ================= AOS ================= */
-    if (window.AOS) {
-      AOS.init({
-        offset: 80,
-        duration: 700,
-        easing: 'ease-out-cubic',
-        once: true
-      });
-    }
-
-    /* ================= GSAP ================= */
-    if (window.gsap && window.ScrollTrigger) {
-      gsap.registerPlugin(ScrollTrigger);
-
-      document.querySelectorAll('.show-feature').forEach((block) => {
-        const photo = block.querySelector('.photo');
-        const info  = block.querySelector('.info');
-        const right = block.classList.contains('right');
-
-        gsap.fromTo(photo, { x: right ? 70 : -70, opacity: 0 }, {
-          x: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
-          scrollTrigger: { trigger: block, start: 'top 85%', toggleActions: 'play none none reverse' }
-        });
-
-        gsap.fromTo(info, { x: right ? -70 : 70, opacity: 0 }, {
-          x: 0, opacity: 1, duration: 0.6, ease: 'power2.out', delay: 0.08,
-          scrollTrigger: { trigger: block, start: 'top 85%', toggleActions: 'play none none reverse' }
-        });
-      });
-    }
-
-    /* =========== efecto de tipeo =========== */
-    const subtitleTarget = document.getElementById('hero-subtitle');
-    const titleEl = document.getElementById('hero-title');
-
-    const phrases = [
-      "Esto es música para las señoritas.",
-      "Esto recién empieza, la promesa.",
-      "Maaami vuelve... que te quiero otra vez.",
-      "Como tú no hay dos milloness.",
-      "¡EY!",
-      "¡IdkOnTheBeats!"
-    ];
-
-    let typingTimeout = null;
-    let wasDown = false;
-    let currentPhrase = "";
-
-    function getRandomPhrase(except) {
-      let p = phrases[Math.floor(Math.random() * phrases.length)];
-      if (except && phrases.length > 1) {
-        while (p === except) {
-          p = phrases[Math.floor(Math.random() * phrases.length)];
-        }
-      }
-      return p;
-    }
-
-    function clearTyping() {
-      if (typingTimeout) {
-        clearTimeout(typingTimeout);
-        typingTimeout = null;
-      }
-      if (subtitleTarget) subtitleTarget.textContent = "";
-    }
-
-    function startTyping(phrase) {
-      if (!subtitleTarget) return;
-      clearTyping();
-      currentPhrase = phrase;
-      let i = 0;
-      const speed = 75;
-
-      function typeNext() {
-        if (i <= phrase.length) {
-          subtitleTarget.textContent = phrase.slice(0, i);
-          i++;
-          typingTimeout = setTimeout(typeNext, speed);
-        }
-      }
-      typeNext();
-    }
-
-    if (subtitleTarget) {
-      // primera vez
-      setTimeout(() => {
-        startTyping(getRandomPhrase());
-      }, 450);
-
-      // click título
-      if (titleEl) {
-        titleEl.addEventListener('click', () => {
-          const newPhrase = getRandomPhrase(currentPhrase);
-          startTyping(newPhrase);
-        });
-      }
-
-      // click subtítulo
-      subtitleTarget.parentElement.addEventListener('click', () => {
-        const newPhrase = getRandomPhrase(currentPhrase);
-        startTyping(newPhrase);
-      });
-
-      // scroll: borrar al bajar, reescribir al subir
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY || window.pageYOffset;
-
-        if (y > 120 && !wasDown) {
-          wasDown = true;
-          clearTyping();
-        }
-
-        if (y <= 40 && wasDown) {
-          wasDown = false;
-          const newPhrase = getRandomPhrase(currentPhrase);
-          startTyping(newPhrase);
-        }
-      });
-    }
-
-    // quitar preloader rápido
-    document.body.classList.add('preloaded');
-
-    // mini nudge por si algún dispositivo no repinta
-    setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
-      window.scrollTo(0, window.pageYOffset + 1);
-      window.scrollTo(0, window.pageYOffset - 1);
-      if (window.AOS) AOS.refresh();
-    }, 150);
-  });
-</script>
-
-
-
-<div class="floating-msg" id="lastDropMsg" style="display:none">
-  <div>
-    <strong>Nuevo</strong>
-    Escucha lo último de Idknoou.
-    <br>
-    <a href="https://open.spotify.com/artist/65m6UOB4ekojjqf7FOYqPo" target="_blank" rel="noopener">
-      Abrir en Spotify →
-    </a>
+  <div class="floating-bubble" id="dropBubble">
+    <div>
+      <strong>Nuevo drop</strong>
+      <span>Merch limitado disponible hasta agotar stock.</span>
+    </div>
+    <button type="button" aria-label="Cerrar aviso" onclick="dismissBubble()">×</button>
   </div>
-  <button type="button" aria-label="Cerrar" onclick="document.getElementById('lastDropMsg').remove()">×</button>
-</div>
+
+  <script>
+    const revealTargets = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+
+    revealTargets.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      observer.observe(el);
+    });
+
+    const bubble = document.getElementById('dropBubble');
+    let bubbleTimeout;
+
+    function showBubble() {
+      bubble.classList.add('show');
+      bubbleTimeout = setTimeout(() => {
+        bubble.classList.remove('show');
+      }, 12000);
+    }
+
+    function dismissBubble() {
+      bubble.classList.remove('show');
+      if (bubbleTimeout) clearTimeout(bubbleTimeout);
+    }
+
+    window.dismissBubble = dismissBubble;
+    window.addEventListener('load', () => {
+      setTimeout(showBubble, 2200);
+    });
+  </script>
 </body>
 </html>
